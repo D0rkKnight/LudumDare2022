@@ -22,16 +22,14 @@ public class Spinner : MonoBehaviour
 
         if (Input.GetKey("left shift"))
         {
-            playerSpeed = 20f;
-        }
-        else
-        {
-            playerSpeed = 8f;
+            playerSpeed = 200f;
         }
 
         Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         surfVelo = move * playerSpeed;
 
-        transform.rotation *= Quaternion.Euler(move.x, move.y, 0);
+        //transform.rotation *= Quaternion.Euler(-move.y*Camera.main.transform.up.y,0, -move.x);
+        transform.RotateAround(transform.position,Camera.main.transform.right,-move.y* Time.deltaTime*playerSpeed);
+        transform.RotateAround(transform.position, Camera.main.transform.up, move.x*Time.deltaTime * playerSpeed);
     }
 }
