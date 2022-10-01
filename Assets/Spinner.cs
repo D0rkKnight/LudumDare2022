@@ -30,6 +30,6 @@ public class Spinner : MonoBehaviour
 
         //transform.rotation *= Quaternion.Euler(-move.y*Camera.main.transform.up.y,0, -move.x);
         transform.RotateAround(transform.position,Camera.main.transform.right,-move.y* Time.deltaTime*playerSpeed);
-        transform.RotateAround(transform.position, Camera.main.transform.up, move.x*Time.deltaTime * playerSpeed);
+        transform.RotateAround(transform.position, Camera.main.transform.forward, move.x*Time.deltaTime * playerSpeed);
     }
 }
