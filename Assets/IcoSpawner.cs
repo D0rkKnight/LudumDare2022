@@ -38,7 +38,7 @@ public static float[] angles={165.25905848199864f, 91.88616366096159f, 165.25905
         }
 
         Rocket rok = Instantiate(rocketPrefab, tiles[0].transform);
-        rok.transform.localPosition = Vector3.up * 1;
+        rok.transform.localPosition = Vector3.up * 0.5f;
         rok.transform.localRotation = Quaternion.identity;
     }
 

@@ -12,6 +12,8 @@ public class Spinner : MonoBehaviour
     public float sensitivity;
     //private Transform spawner = GameObject.Find("IcoSpawner").GetComponent<Transform>();
 
+    public Player player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,7 @@ public class Spinner : MonoBehaviour
         surfVelo = move * playerSpeed;
 
         //transform.rotation *= Quaternion.Euler(-move.y*Camera.main.transform.up.y,0, -move.x);
-        transform.RotateAround(spawner.position,Camera.main.transform.right,-move.y* Time.deltaTime*playerSpeed);
-        transform.RotateAround(spawner.position, Camera.main.transform.forward, move.x*Time.deltaTime * playerSpeed);
+        transform.RotateAround(spawner.position, player.transform.right,-move.y* Time.deltaTime*playerSpeed);
+        transform.RotateAround(spawner.position, player.transform.forward, move.x*Time.deltaTime * playerSpeed);
     }
 }

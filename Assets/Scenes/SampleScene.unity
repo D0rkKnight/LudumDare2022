@@ -504,6 +504,7 @@ MonoBehaviour:
   gravityValue: 9.81
   playerSpeed: 60
   sensitivity: 0
+  player: {fileID: 1549391888}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
