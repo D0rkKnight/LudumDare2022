@@ -1,0 +1,26 @@
+# Created with the Wolfram Language : www.wolfram.com
+mtllib triangle2.mtl
+
+# 6 vertex positions
+v  -1 0 0
+v  0.5 0 -0.8660253882408142
+v  0.5 0 0.8660253882408142
+v  0.5 0.4000000059604645 -0.8660253882408142
+v  -1 0.4000000059604645 0
+v  0.5 0.4000000059604645 0.8660253882408142
+
+# 0 UV coordinates
+
+# 0 vertex normals
+
+# Mesh '' with 8 faces
+usemtl DefaultMaterial
+f  1/ 2/ 3/
+f  2/ 4/ 3/
+f  2/ 1/ 5/
+f  6/ 4/ 5/
+f  4/ 2/ 5/
+f  4/ 6/ 3/
+f  6/ 5/ 3/
+f  5/ 1/ 3/
+
