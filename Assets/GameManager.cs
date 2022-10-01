@@ -2,20 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Orbiter : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    private Camera cam;
-    public Transform target;
-    public float distFromTarg;
-
     // Start is called before the first frame update
     void Start()
     {
-        cam = GetComponent<Camera>();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
+        
     }
 }

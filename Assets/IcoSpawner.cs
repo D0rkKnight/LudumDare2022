@@ -14,20 +14,32 @@ public static float[] angles={165.25905848199864f, 91.88616366096159f, 165.25905
 
     public Vector3 offset = new Vector3(-2, -5, 0);
 
+    public GameObject[] tiles = new GameObject[20];
+
 //https://answers.unity.com/questions/11363/converting-matrix4x4-to-quaternion-vector3.html
     public static Quaternion QuaternionFromMatrix(Matrix4x4 m) { return Quaternion.LookRotation(m.GetColumn(2), m.GetColumn(1)); }
-    public GameObject prefab;
+    public GameObject tilePrefab;
+
+    public Rocket rocketPrefab;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         for(var i=0;i<20;i++){
             // Manual offset given because the slices are spawned off center for some reason
 
-            GameObject obj = Instantiate(prefab, transform);
+            GameObject obj = Instantiate(tilePrefab, transform);
             obj.transform.localPosition = (Positions[i] + offset) * size;
             obj.transform.rotation = Quaternion.AngleAxis(angles[i], axes[i]);
+
+            tiles[i] = obj;
         }
-        
+
+        Rocket rok = Instantiate(rocketPrefab, tiles[0].transform);
+        rok.transform.localPosition = Vector3.up * 1;
+        rok.transform.localRotation = Quaternion.identity;
     }
 
     // Update is called once per frame
