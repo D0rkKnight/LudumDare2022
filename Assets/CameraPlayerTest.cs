@@ -4,63 +4,72 @@ using UnityEngine;
 
 public class CameraPlayerTest : MonoBehaviour
 {
-    public CharacterController controller;
-    private Vector3 playerVelocity;
-    public bool groundedPlayer;
+    private CharacterController controller;
+
+    private Vector3 surfVelo;
+    public bool grounded;
     public float jumpHeight;
-    public float gravityValue = -9.81f;
-    public float playerSpeed = 10f;
+    public float gravityValue = 9.81f;
+    public float playerSpeed = 1f;
     public string Jump;
-    public GameObject Camera;
     public float sensitivity;
     private Vector3 offset;
-    public GameObject Player;
-    public Rigidbody rb;
+
+    public Transform gravSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));// new Vector3(Input.GetAxis("Mouse X"), 0, Input.GetAxis("Mouse Y"));
-        //Vector3 move2 = new Vector3(Input.GetAxis("Mouse X"), 0, Input.GetAxis("Mouse Y"));
-        //controller.Move((move * Time.deltaTime * playerSpeed));
-        if (Input.GetAxis("Vertical") != 0)
-        {
-            controller.Move(Camera.transform.forward * Time.deltaTime * playerSpeed * Input.GetAxis("Vertical"));
-        }
-        if (Input.GetAxis("Horizontal") != 0)
-        {
-            controller.Move(Camera.transform.right * Time.deltaTime * playerSpeed * Input.GetAxis("Horizontal"));
-        }
         if (Input.GetKey("left shift"))
         {
-            playerSpeed = 30f;
+            playerSpeed = 20f;
         }
         else
         {
-            playerSpeed = 10f;
+            playerSpeed = 8f;
         }
+
+        Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        surfVelo = move * playerSpeed;
+
         //controller.Move(Camera.transform.forward * Time.deltaTime * playerSpeed);
         //if (Input.GetKey(KeyCode.Mouse1))
 
         //.Move(move + Camera.transform.forward * Time.deltaTime * playerSpeed);
         //}
-        if (Input.GetKey(Jump))
+        /*if (Input.GetKey(Jump))
         {
             playerVelocity.y = jumpHeight;
-        }
+        }*/
+
         float rotateHorizontal = Input.GetAxis("Mouse X");
         float rotateVertical = Input.GetAxis("Mouse Y");
-        Player.transform.RotateAround(Player.transform.position, -Vector3.up, -rotateHorizontal * sensitivity);
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
 
-        //controller.transform.forward = Player.transform.forward;
+        transform.RotateAround(transform.position, -Vector3.up, -rotateHorizontal * sensitivity);
+
+        Vector3 contMove = Camera.main.transform.up * surfVelo.y + Camera.main.transform.right * surfVelo.x;
+
+        float fall = gravityValue;
+        if (controller.isGrounded)
+            fall = 0;
+
+        Debug.Log(contMove);
+        Vector3 dirToGround = -(transform.position - gravSource.position).normalized;
+        contMove += dirToGround * fall;
+
+        controller.Move(contMove * Time.fixedDeltaTime);
+
+
+
+        // Point player up
+        transform.LookAt(Camera.main.transform.up, -Camera.main.transform.forward);
     }
 
 }
