@@ -12,7 +12,7 @@ public class IcoSpawnwPrefabList : MonoBehaviour
     public static int[,] Adjacency = new int[,] { { 3, 5, 9 }, { 4, 6, 10 }, { 1, 7, 11 }, { 2, 8, 12 }, { 1, 13, 17 }, { 2, 14, 18 }, { 3, 13, 18 }, { 4, 14, 17 }, { 1, 16, 20 }, { 2, 15, 19 }, { 3, 16, 19 }, { 4, 15, 20 }, { 5, 7, 14 }, { 6, 8, 13 }, { 10, 12, 16 }, { 9, 11, 15 }, { 5, 8, 20 }, { 6, 7, 19 }, { 10, 11, 18 }, { 9, 12, 17 } };
     public float size = 2;
 
-    public Vector3 offset = new Vector3(-2, -5, 0);
+    public Vector3 offset = new Vector3(0, -10, 0);
 
     //https://answers.unity.com/questions/11363/converting-matrix4x4-to-quaternion-vector3.html
     public static Quaternion QuaternionFromMatrix(Matrix4x4 m) { return Quaternion.LookRotation(m.GetColumn(2), m.GetColumn(1)); }
@@ -27,7 +27,7 @@ public class IcoSpawnwPrefabList : MonoBehaviour
         for (var i = 0; i < 20; i++)
         {
             // Manual offset given because the slices are spawned off center for some reason
-
+            int random = Random.Range(0, 3);
             GameObject obj = Instantiate(prefab2[i], transform);
             obj.transform.localPosition = (Positions[i] + offset) * size;
             obj.transform.rotation = Quaternion.AngleAxis(angles[i], axes[i]);

@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         {
             rocket.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             Debug.Log("TrueLiftOff");
-            rocket.gameObject.GetComponent<Rigidbody>().AddForce(rocket.cam.transform.up*100);
+            rocket.gameObject.GetComponent<Rigidbody>().AddForce(rocket.cam.transform.up*10000);
         }
         Debug.Log(rocket.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
     }
