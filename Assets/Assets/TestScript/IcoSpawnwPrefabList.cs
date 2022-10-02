@@ -34,7 +34,8 @@ public class IcoSpawnwPrefabList : MonoBehaviour
 
             tiles[i] = obj;
         }
-
+        
+        // Spawn rocket
         Rocket rok = Instantiate(rocketPrefab, tiles[0].transform);
         rok.transform.localPosition = Vector3.up * 0.5f;
         rok.transform.localRotation = Quaternion.identity;
