@@ -29,6 +29,7 @@ public class IcoSpawnwPrefabList : MonoBehaviour
             obj.transform.rotation = Quaternion.AngleAxis(angles[i], axes[i]);
         }
 
+
     }
 
     // Update is called once per frame

@@ -209,6 +209,7 @@ MonoBehaviour:
   gravityValue: 9.81
   playerSpeed: 15
   sensitivity: 0
+  Core: {fileID: 0}
   player: {fileID: 0}
 --- !u!1 &898754020
 GameObject:
