@@ -23,7 +23,7 @@ public class Spinner : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Transform spawner = GameObject.Find("IcoSpawner").GetComponent<Transform>();
+        Transform spawner = GameObject.Find("Spawner").GetComponent<Transform>();
         if (Input.GetKey("left shift"))
         {
             playerSpeed = 200f;
@@ -32,7 +32,7 @@ public class Spinner : MonoBehaviour
         Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         surfVelo = move * playerSpeed;
 
-        //transform.rotation *= Quaternion.Euler(-move.y*Camera.main.transform.up.y,0, -move.x);
+        transform.rotation *= Quaternion.Euler(-move.y*Camera.main.transform.up.y,0, -move.x);
         transform.RotateAround(spawner.position, player.transform.right,-move.y* Time.deltaTime*playerSpeed);
         transform.RotateAround(spawner.position, player.transform.forward, move.x*Time.deltaTime * playerSpeed);
     }
