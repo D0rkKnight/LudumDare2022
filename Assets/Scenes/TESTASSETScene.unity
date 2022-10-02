@@ -210,7 +210,11 @@ MonoBehaviour:
   gravityValue: 9.81
   playerSpeed: 15
   sensitivity: 0
+<<<<<<< HEAD
   Core: {fileID: 971083737}
+=======
+  Core: {fileID: 0}
+>>>>>>> 0d8cb1ef35b539d326878258c21fe825b1577ebb
   player: {fileID: 0}
 --- !u!114 &308653901
 MonoBehaviour:

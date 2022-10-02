@@ -12,7 +12,11 @@ public class ParticleSpawner : MonoBehaviour
     {
         var matrix = transform.localToWorldMatrix;
         Mesh spheremesh = GameObject.Find("Sphere").GetComponent<MeshFilter>().mesh;
+<<<<<<< HEAD
         GameObject spawner = GameObject.Find("Spawner");
+=======
+
+>>>>>>> 0d8cb1ef35b539d326878258c21fe825b1577ebb
         Vector3[] verts = spheremesh.vertices;
         for (int i = 0; i < verts.Length; i+=5)
         {
