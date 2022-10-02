@@ -10,9 +10,9 @@ public class ParticleSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var matrix = transform.localToWorldMatrix;
-        Mesh spheremesh = GameObject.Find("Sphere").GetComponent<MeshFilter>().mesh;
-        GameObject spawner = GameObject.Find("Spawner");
+        var matrix = GameObject.Find("Particles").transform.localToWorldMatrix;
+        Mesh spheremesh = GameObject.Find("Particles").GetComponent<MeshFilter>().mesh;
+        //GameObject spawner = GameObject.Find("Spawner");
 
         Vector3[] verts = spheremesh.vertices;
         for (int i = 0; i < verts.Length; i+=5)
@@ -20,8 +20,10 @@ public class ParticleSpawner : MonoBehaviour
             int j = Random.Range(-5,5);
             if (j > 0)
             {
-                var Go = GameObject.Find("Sphere");
-                var spawn = Instantiate(ball,matrix.MultiplyPoint3x4(verts[i]), spawner.transform.rotation);
+                //var Go = GameObject.Find("Particles");
+                var spawn = Instantiate(ball, transform);
+                spawn.transform.localPosition = matrix.MultiplyPoint3x4(verts[i]);
+                spawn.transform.rotation = transform.localRotation;
             }
             //var Go = GameObject.Find("Sphere");
             //var spawn = Instantiate(ball, matrix.MultiplyPoint3x4(verts[i]),transform.rotation);
