@@ -17,6 +17,10 @@ public class IcoSpawnwPrefabList : MonoBehaviour
     //https://answers.unity.com/questions/11363/converting-matrix4x4-to-quaternion-vector3.html
     public static Quaternion QuaternionFromMatrix(Matrix4x4 m) { return Quaternion.LookRotation(m.GetColumn(2), m.GetColumn(1)); }
     public GameObject[] prefab2 = new GameObject[20];
+
+    public Rocket rocketPrefab;
+
+    public GameObject[] tiles = new GameObject[20];
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +31,13 @@ public class IcoSpawnwPrefabList : MonoBehaviour
             GameObject obj = Instantiate(prefab2[i], transform);
             obj.transform.localPosition = (Positions[i] + offset) * size;
             obj.transform.rotation = Quaternion.AngleAxis(angles[i], axes[i]);
+
+            tiles[i] = obj;
         }
 
-
+        Rocket rok = Instantiate(rocketPrefab, tiles[0].transform);
+        rok.transform.localPosition = Vector3.up * 0.5f;
+        rok.transform.localRotation = Quaternion.identity;
     }
 
     // Update is called once per frame

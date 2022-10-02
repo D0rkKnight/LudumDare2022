@@ -29,6 +29,21 @@ public class Player : MonoBehaviour
         euler.x -= ver;
         euler.x = Mathf.Clamp(euler.x, 0, 80);
         camFocus.localRotation = Quaternion.Euler(euler);
+
+
+        // Raycast objects
+        RaycastHit hit;
+        LayerMask mask = LayerMask.GetMask(new string[] { "Selectable" });
+
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 100f, mask))
+        {
+            GameObject obj = hit.transform.gameObject;
+
+            if (objInRange.Contains(obj))
+            {
+                Debug.Log("Scanning valid object");
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
