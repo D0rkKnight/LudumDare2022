@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     public static Player player;
     public static Rocket rocket;
-
+    bool liftOff = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,11 +38,30 @@ public class GameManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     rocket.cam.gameObject.SetActive(true);
-
+                    
+                    GameObject.Find("Spawner").GetComponent<Spinner>().enabled = false;
                     // Get into it!
-                    Destroy(player.gameObject);
+                    player.gameObject.SetActive(false);
+                    StartCoroutine(LiftOff());
+                    
+                    //Destroy(player.gameObject);
                 }
             }
         }
+        if (liftOff == true)
+        {
+            Debug.Log("TrueLiftOff");
+            rocket.gameObject.GetComponent<Rigidbody>().AddForce(0,0,10);
+        }
+    }
+    IEnumerator LiftOff()
+    {
+        for (int i = 0; i < 11; i++)
+        {
+            yield return new WaitForSeconds(1);
+            Debug.Log(10 - i);
+        }
+        liftOff = true;
+        Debug.Log("LiftOff!");
     }
 }
