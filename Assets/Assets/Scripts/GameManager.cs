@@ -8,10 +8,9 @@ public class GameManager : MonoBehaviour
     public GameObject Ball;
     public static Player player;
     public static Rocket rocket;
-<<<<<<< HEAD
-    bool liftOff = false;
+
     public float fuel = 0;
-=======
+
     public static IcoSpawnwPrefabList ico;
     bool rocketBoarded = false;
 
@@ -20,7 +19,6 @@ public class GameManager : MonoBehaviour
 
     public static float timeLeft = 10f;
     public static bool gameOver = false;
->>>>>>> 0caa860fc5ab36b4618f0fc2bd7f86d55700c5a7
 
     // Start is called before the first frame update
     void Start()
@@ -70,26 +68,16 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-<<<<<<< HEAD
         if (fuel == 10)
         {
             Debug.Log("You Win!");
         }
-        if (liftOff == true)
-        {
-            rocket.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            Debug.Log("TrueLiftOff");
-            rocket.gameObject.GetComponent<Rigidbody>().AddForce(rocket.cam.transform.up*10000);
-        }
-        Debug.Log(rocket.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
-=======
 
         // Update timer
         if (timeLeft > 0 && timeLeft - Time.deltaTime <= 0)
             StartCoroutine(explode());
 
         timeLeft -= Time.deltaTime;
->>>>>>> 0caa860fc5ab36b4618f0fc2bd7f86d55700c5a7
     }
     IEnumerator LiftOff()
     {
