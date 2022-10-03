@@ -33,14 +33,7 @@ public class Spinner : MonoBehaviour
         Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         surfVelo = move * playerSpeed;
         bool spinning = true;
-        //transform.rotation *= Quaternion.Euler(-move.y*player.transform.up.y,0, -move.x);
-        /*if (Input.GetKey("f"))
-        {
-            spinning = false;
-            transform.RotateAround(Core.transform.position, rocket.transform.right, -move.y * Time.deltaTime * playerSpeed);
-            transform.RotateAround(Core.transform.position, rocket.transform.forward, move.x * Time.deltaTime * playerSpeed);
-        }
-        */
+
         if (spinning)
         {
             transform.RotateAround(Core.transform.position, player.transform.right, -move.y * Time.deltaTime * playerSpeed);

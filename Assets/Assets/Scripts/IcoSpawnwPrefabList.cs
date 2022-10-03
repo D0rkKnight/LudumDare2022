@@ -21,6 +21,8 @@ public static Vector3[] Positions={new Vector3(0f, -0.7423442429410712f, -0.2835
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.ico = this;
+
         for (var i = 0; i < 20; i++)
         {
             // Manual offset given because the slices are spawned off center for some reason
@@ -42,5 +44,33 @@ public static Vector3[] Positions={new Vector3(0f, -0.7423442429410712f, -0.2835
     void Update()
     {
 
+    }
+
+    public void explode()
+    {
+        foreach (GameObject t in tiles)
+        {
+            Rigidbody rb = t.AddComponent<Rigidbody>();
+
+            Vector3 dir = (t.transform.position - transform.position).normalized;
+            rb.AddForce(dir * 100f);
+            rb.useGravity = false;
+
+            Destroy(t, 3);
+        }
+
+        GameManager.player.enabled = false;
+
+        GameObject pObj = GameManager.player.gameObject;
+        Rigidbody prb = pObj.AddComponent<Rigidbody>();
+        prb.useGravity = false;
+        prb.AddForce(Vector3.up * 100f);
+
+        Destroy(pObj, 3);
+        GameManager.player = null; // Unlink the player
+        Camera.main.transform.parent = null; // Unlink the camera too
+
+        // Pause spin
+        GetComponent<Spinner>().enabled = false;
     }
 }

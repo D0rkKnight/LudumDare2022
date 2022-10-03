@@ -8,7 +8,13 @@ public class GameManager : MonoBehaviour
 
     public static Player player;
     public static Rocket rocket;
+    public static IcoSpawnwPrefabList ico;
     bool liftOff = false;
+
+
+    public static float timeLeft = 10f;
+    public static bool gameOver = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +37,6 @@ public class GameManager : MonoBehaviour
 
             if (objInRange.Contains(obj))
             {
-                Debug.Log("Scanning valid object");
-
-
                 // Rocket boarding
                 if (Input.GetKeyDown(KeyCode.F))
                 {
@@ -52,9 +55,14 @@ public class GameManager : MonoBehaviour
         {
             rocket.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             Debug.Log("TrueLiftOff");
-            rocket.gameObject.GetComponent<Rigidbody>().AddForce(rocket.cam.transform.up*10000);
+            rocket.gameObject.GetComponent<Rigidbody>().AddForce(rocket.cam.transform.up*100);
         }
-        Debug.Log(rocket.gameObject.GetComponent<Rigidbody>().velocity.magnitude);
+
+        // Update timer
+        if (timeLeft > 0 && timeLeft - Time.deltaTime <= 0)
+            explode();
+
+        timeLeft -= Time.deltaTime;
     }
     IEnumerator LiftOff()
     {
@@ -65,5 +73,11 @@ public class GameManager : MonoBehaviour
         }
         liftOff = true;
         Debug.Log("LiftOff!");
+    }
+
+    public void explode()
+    {
+        ico.explode();
+        gameOver = true;
     }
 }
