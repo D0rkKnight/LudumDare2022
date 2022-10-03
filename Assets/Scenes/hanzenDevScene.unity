@@ -513,6 +513,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5313131870354466551, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: Ball
+      value: 
+      objectReference: {fileID: 7781247155791100871, guid: 35264db230e2a7247865da8b814ff293,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1162676a7102b94d9570f74a6195d15, type: 3}
 --- !u!1001 &1374439019
@@ -776,12 +782,32 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2146152184}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1539196851}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f990c0c768aeff439a10e603efd963a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1539196851 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8328305817423162436, guid: 2a0c307d319fc574793d9d82de904369,
+    type: 3}
+  m_PrefabInstance: {fileID: 2146152184}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1539196855
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539196851}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.538285
+  m_Height: 9.151503
+  m_Direction: 1
+  m_Center: {x: 0.10525701, y: 3.4020088, z: 0}
 --- !u!1 &1687345575 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: da8f15856c78e3545b0847db7f2d60b9,
@@ -1087,6 +1113,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328305817423162436, guid: 2a0c307d319fc574793d9d82de904369,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8340858791596062758, guid: 2a0c307d319fc574793d9d82de904369,
         type: 3}
