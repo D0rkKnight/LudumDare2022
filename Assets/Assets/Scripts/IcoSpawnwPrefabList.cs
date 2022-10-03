@@ -14,33 +14,50 @@ public static Vector3[] Positions={new Vector3(0f, -0.7423442429410712f, -0.2835
     public Vector3 offset = new Vector3(-2, -5, 0);
 
     public GameObject[] prefabList = new GameObject[3];
-
-    public Rocket rocketPrefab;
-
     public GameObject[] tiles = new GameObject[20];
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
+        GameManager.ico = this;
+
         for (var i = 0; i < 20; i++)
         {
             // Manual offset given because the slices are spawned off center for some reason
 
-            GameObject obj = Instantiate(prefabList[(int)Random.Range(0,prefabList.Length)], transform);
+            GameObject obj = Instantiate(prefabList[Random.Range(0, prefabList.Length)], transform);
             obj.transform.localPosition = (Positions[i] + offset) * size;
             obj.transform.rotation = Quaternion.AngleAxis(Angles[i], Axes[i]);
 
             tiles[i] = obj;
         }
-        
-        // Spawn rocket
-        Rocket rok = Instantiate(rocketPrefab, tiles[0].transform);
-        rok.transform.localPosition = Vector3.up * 0.5f;
-        rok.transform.localRotation = Quaternion.identity;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void explode()
+    {
+        foreach (GameObject t in tiles)
+        {
+            Rigidbody rb = t.AddComponent<Rigidbody>();
+
+            Vector3 dir = (t.transform.position - transform.position).normalized;
+            rb.AddForce(dir * 100f);
+            rb.useGravity = false;
+        }
+        Destroy(gameObject, 3);
+
+        // Pause spin
+        GetComponent<Spinner>().enabled = false;
     }
 }

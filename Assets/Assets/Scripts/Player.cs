@@ -7,9 +7,10 @@ public class Player : MonoBehaviour
 
     // Cam pointed at the player
     public Transform camFocus;
+    public Camera cam;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GameManager.player = this;
     }
