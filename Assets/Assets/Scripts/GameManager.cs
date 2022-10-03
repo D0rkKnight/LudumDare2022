@@ -5,10 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static List<GameObject> objInRange;
-
+    public GameObject Ball;
     public static Player player;
     public static Rocket rocket;
     bool liftOff = false;
+    public float fuel = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,10 @@ public class GameManager : MonoBehaviour
                     //Destroy(player.gameObject);
                 }
             }
+        }
+        if (fuel == 10)
+        {
+            Debug.Log("You Win!");
         }
         if (liftOff == true)
         {
