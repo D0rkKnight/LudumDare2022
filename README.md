@@ -6,16 +6,19 @@ This was developed over 3 days with relatively few hours put in.
 
 ## TODO
 (David's todo ideas)
- Gameplay:
+
+ **Gameplay:**
  - Add ability to collect particles
  - Add "Press F to enter rocket" prompt
  - Add visual cue that the planet is gonna blow up.
  - Add UI element: particles collected / total.
  - Add UI element: nicer timer?
- Menu additions:
+
+ **Menu additions:**
  - Pause menu (main menu, resume)
  - Sound autoplay + mute button
- Misc:
+
+ **Misc:**
  - Rocket particle effects
  - Fix rocket clipping planet
  - Make the particles on the planet look cooler. Glowing spheres?
