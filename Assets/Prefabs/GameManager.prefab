@@ -147,6 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb110fe398665743913d703d202fcb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icoPrefab: {fileID: 2500425283263765846, guid: d7d5706d769bc4941aad6a45b6808bc3,
+    type: 3}
+  rocketPrefab: {fileID: -713242735646426285, guid: 94387e5af66142246959c288ae59aa97,
+    type: 3}
 --- !u!1001 &3029531205978287905
 PrefabInstance:
   m_ObjectHideFlags: 0

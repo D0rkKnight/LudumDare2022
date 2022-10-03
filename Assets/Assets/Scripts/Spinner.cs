@@ -10,11 +10,7 @@ public class Spinner : MonoBehaviour
     public float gravityValue = 9.81f;
     public float playerSpeed = 1f;
     public float sensitivity;
-    public GameObject Core;
     //private Transform spawner = GameObject.Find("IcoSpawner").GetComponent<Transform>();
-
-    public Player player;
-    public Rocket rocket;
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +30,11 @@ public class Spinner : MonoBehaviour
         surfVelo = move * playerSpeed;
         bool spinning = true;
 
-        if (spinning)
+        if (spinning && GameManager.player != null && GameManager.ico != null)
         {
-            transform.RotateAround(Core.transform.position, player.transform.right, -move.y * Time.deltaTime * playerSpeed);
-            transform.RotateAround(Core.transform.position, player.transform.forward, move.x * Time.deltaTime * playerSpeed);
+            GameObject Core = GameManager.ico.gameObject;
+            transform.RotateAround(Core.transform.position, GameManager.player.transform.right, -move.y * Time.deltaTime * playerSpeed);
+            transform.RotateAround(Core.transform.position, GameManager.player.transform.forward, move.x * Time.deltaTime * playerSpeed);
         }
         
     }

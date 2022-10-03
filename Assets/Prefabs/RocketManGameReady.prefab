@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camFocus: {fileID: 2025659440}
-  objInRange: []
+  cam: {fileID: 330585545}
 --- !u!4 &8709898631880374014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5e53e6483849ba44c8ebf9ac3115bf86,
