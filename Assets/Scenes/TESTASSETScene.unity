@@ -172,27 +172,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 2
   offset: {x: 0, y: 0, z: 0}
-  prefab2:
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
-  - {fileID: 4888762503304475265, guid: 11f26ae75d9027146b8376f99ed260b8, type: 3}
+  prefabList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  rocketPrefab: {fileID: 0}
+  tiles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &308653900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +217,7 @@ MonoBehaviour:
   sensitivity: 0
   Core: {fileID: 971083737}
   player: {fileID: 0}
+  rocket: {fileID: 0}
 --- !u!114 &308653901
 MonoBehaviour:
   m_ObjectHideFlags: 0
