@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 3dcb5c98a8d0d174a93ad5b1c244de1b
+=======
+guid: 772e631eaca6c2540a2fe37103cd7e97
+>>>>>>> 3b1c080d8813d44ab41981cc260f3a3c4335212f
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -35,15 +39,24 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
+<<<<<<< HEAD
     globalScale: 1
+=======
+    globalScale: 100
+>>>>>>> 3b1c080d8813d44ab41981cc260f3a3c4335212f
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
+<<<<<<< HEAD
     importCameras: 1
     importLights: 1
+=======
+    importCameras: 0
+    importLights: 0
+>>>>>>> 3b1c080d8813d44ab41981cc260f3a3c4335212f
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
