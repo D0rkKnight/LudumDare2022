@@ -176,7 +176,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  rocketPrefab: {fileID: 0}
   tiles:
   - {fileID: 0}
   - {fileID: 0}
@@ -215,9 +214,6 @@ MonoBehaviour:
   gravityValue: 9.81
   playerSpeed: 15
   sensitivity: 0
-  Core: {fileID: 971083737}
-  player: {fileID: 0}
-  rocket: {fileID: 0}
 --- !u!114 &308653901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,12 +536,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &971083737 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: da8f15856c78e3545b0847db7f2d60b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1374439019}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &971083740 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: da8f15856c78e3545b0847db7f2d60b9,
