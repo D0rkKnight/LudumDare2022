@@ -18,28 +18,32 @@ public class GameManager : MonoBehaviour
     public Rocket rocketPrefab;
 
     public static float timeLeft = 10f;
-    public static bool gameOver = false;
+
+    public static bool gameIsOver = false;
+    public static bool startReady = true;
+    public static bool restartReady = false;
+    public static bool inPlay = false;
+
+    public static Camera activeCam;
+    public Camera freeCam;
+
+
+    public static GameManager sing;
+
+
+    private void Awake()
+    {
+        if (sing != null)
+            throw new System.Exception("Singleton broken");
+
+        sing = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
         objInRange = new List<GameObject>();
-
-        // Deactivate player for landing animation
-        player.gameObject.SetActive(false);
-
-        spawnPlanet();
-
-        // Spawn rocket
-        Rocket rok = Instantiate(rocketPrefab, ico.tiles[0].transform);
-        rok.transform.localPosition = Vector3.up * 0.5f;
-        rok.transform.localRotation = Quaternion.identity;
-        rok.cam.gameObject.SetActive(true);
-
-        StartCoroutine(landRocket());
+        activeCam = Camera.main;
     }
 
     // Update is called once per frame
@@ -58,8 +62,7 @@ public class GameManager : MonoBehaviour
                 // Rocket boarding
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    Camera.main.gameObject.SetActive(false);
-                    rocket.cam.gameObject.SetActive(true);
+                    switchCam(rocket.cam);
 
                     ico.GetComponent<Spinner>().enabled = false;
                     // Get into it!
@@ -100,19 +103,7 @@ public class GameManager : MonoBehaviour
 
         if (!rocketBoarded)
         {
-            gameOver = true;
-
-            // Toss the player
-            player.enabled = false;
-
-            GameObject pObj = GameManager.player.gameObject;
-            Rigidbody prb = pObj.AddComponent<Rigidbody>();
-            prb.useGravity = false;
-            prb.AddForce(Vector3.up * 100f);
-
-            Destroy(pObj, 3);
-            Camera.main.transform.parent = null; // Unlink the camera too
-            player = null; // Unlink the player
+            StartCoroutine(gameOver());
         }
         else
         {
@@ -122,6 +113,45 @@ public class GameManager : MonoBehaviour
             spawnPlanet();
             StartCoroutine(landRocket());
         }
+    }
+
+    public static IEnumerator gameOver()
+    {
+        gameIsOver = true;
+        inPlay = false;
+
+        switchCam(sing.freeCam);
+
+        yield return new WaitForSeconds(3);
+        player.gameObject.SetActive(false);
+
+        startReady = true; // Toggle restart flip flop
+
+        // Enable cursor for UI interaction
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public static void startGame()
+    {
+        gameIsOver = false;
+        startReady = false;
+        restartReady = false;
+        inPlay = true;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        sing.spawnPlanet();
+
+        if (rocket == null)
+        {
+            // Spawn rocket
+            Rocket rok = Instantiate(sing.rocketPrefab, ico.tiles[0].transform);
+            rok.transform.localPosition = Vector3.up * 0.5f;
+            rok.transform.localRotation = Quaternion.identity;
+        }
+
+        sing.StartCoroutine(sing.landRocket());
     }
 
     public void spawnPlanet()
@@ -135,6 +165,11 @@ public class GameManager : MonoBehaviour
     // Assumes rocket is attached to a tile
     public IEnumerator landRocket()
     {
+        switchCam(rocket.cam);
+
+        // Deactivate player for landing animation
+        player.gameObject.SetActive(false);
+
         rocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         // Ico attached now, go to it
@@ -160,7 +195,14 @@ public class GameManager : MonoBehaviour
         timeLeft = 10f;
 
         // Swap cam views back to player
-        Camera.main.gameObject.SetActive(false);
-        player.cam.gameObject.SetActive(true);
+        switchCam(player.cam);
+    }
+
+    public static void switchCam(Camera cam)
+    {
+        activeCam.gameObject.SetActive(false);
+        cam.gameObject.SetActive(true);
+
+        activeCam = cam;
     }
 }
