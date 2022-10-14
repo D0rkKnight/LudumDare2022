@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        if (fuel == 10)
+        if (fuel >= 10)
         {
             Debug.Log("You Win!");
         }

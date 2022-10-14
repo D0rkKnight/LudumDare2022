@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class collision : MonoBehaviour
 {
-    
-    public GameObject gm;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,15 +15,13 @@ public class collision : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-       
-        if (collision.gameObject.tag == "Player")
-        {
 
-            Destroy(gameObject,1);
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Destroy(gameObject, 1);
             GameManager.fuel += 1;
-            Debug.Log(GameManager.fuel);
         }
     }
 }
