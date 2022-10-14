@@ -16,10 +16,65 @@ public class PlanetScript : MonoBehaviour
     public static float[] Angles={165.25905848199864f, 91.88616366096159f, 165.25905848199864f, 91.88616366096159f, 134.9844825892755f, 159.81476509489744f, 134.9844825892755f, 159.81476509489744f, 150.50923099225025f, 58.940212151671034f, 150.50923099225025f, 58.940212151671034f, 180f, 69.0948425521107f, 88.99059282741865f, 147.0563196031679f, 165.25905848199864f, 165.25905848199864f, 125.38266963381925f, 152.6294221633374f};
     public static int[,] Adjacency=new int[,]{{3, 5, 9}, {4, 6, 10}, {1, 7, 11}, {2, 8, 12}, {1, 13, 17}, {2, 14, 18}, {3, 13, 18}, {4, 14, 17}, {1, 16, 20}, {2, 15, 19}, {3, 16, 19}, {4, 15, 20}, {5, 7, 14}, {6, 8, 13}, {10, 12, 16}, {9, 11, 15}, {5, 8, 20}, {6, 7, 19}, {10, 11, 18}, {9, 12, 17}};
 
+    //Distance from center of planet -> bottom of tile. 
+    //The tile heights are 0.4 so the player can be placed 0.4 above that.
     public float size = 1.64728f;
+    
+    //prefab list should be populated by potential tiles
     public GameObject[] prefabList;
 
+    private bool exploded = false;
+    //privately managed tile GameObjects
     private GameObject[] tiles;
+
+    //rumble 0 means don't rumble, rumble 1 means max rumble.
+    //This probably should be done with a tweening library or a coroutine,
+    //but this works.
+    private bool rumbling = false;
+    private float rumble = 0.0f;
+    private float rumbleTime = 0.0f;
+    private float rumbleElapsed = 0.0f;
+    public void triggerRumble(float rumbleBuildup)
+    {
+        rumbling = true;
+        rumble = 0.0f;
+        rumbleTime = rumbleBuildup; //counter (constant)
+        rumbleElapsed = 0.0f; //time passed in the rumble anim
+    }
+    public float rumbleTween(float t)
+    {
+        if (t < 0.3f) 
+            return 0.0f;
+        else if (t > 1.0f)
+            return 1.0f;
+        //quadratic function that's 0 when t=0.3, 1 when t=1.
+        return (t - 0.3f) * (t - 0.3f) / (0.7f*0.7f);
+    }
+    private void updateRumble()
+    {
+        if (!exploded && rumbling)
+        {
+            //advance time and add random positions to transformations.
+            rumbleElapsed += Time.deltaTime;
+            rumble = rumbleTween(rumbleElapsed / rumbleTime);
+            if (rumble > 0.0f)
+            {
+                float sc = rumble * 0.1f; //scale for position rumbling
+                for (var i = 0; i < 20; i++)
+                {
+                    if (tiles[i])
+                    {
+                        tiles[i].transform.localPosition = (Positions[i]) * size + new Vector3(Random.Range(-sc, sc), Random.Range(-sc, sc), Random.Range(-sc, sc));
+                        tiles[i].transform.rotation = Quaternion.AngleAxis(Angles[i], Axes[i]);
+                    }
+                }
+            }
+            if(rumbleElapsed/rumbleTime > 1.0f)
+            {
+                explode();
+            }
+        }
+    }
 
     private void destroyTiles()
     {
@@ -33,7 +88,6 @@ public class PlanetScript : MonoBehaviour
     }
     private void instantiateTiles()
     {
-
         tiles = new GameObject[20];
         for (var i = 0; i < 20; i++)
         {
@@ -51,24 +105,33 @@ public class PlanetScript : MonoBehaviour
     void Start()
     {
         instantiateTiles();
+        rumble = 1.0f;
+        exploded = false;
+        triggerRumble(25.0f);
     }
+
 
     // Update is called once per frame
     void Update()
     {
-
+        updateRumble();
     }
 
     public void explode()
     {
         foreach (GameObject t in tiles)
         {
-            Rigidbody rb = t.AddComponent<Rigidbody>();
-            Vector3 dir = (t.transform.position - transform.position).normalized;
-            const float sc = 0.5f;
-            Vector3 randomPosition = transform.position +new Vector3(Random.Range(-sc, sc), Random.Range(-sc, sc), Random.Range(-sc, sc));
-            rb.AddForceAtPosition(dir * 100f,randomPosition);
-            rb.useGravity = false;
+            if (t)
+            {
+                Rigidbody rb = t.AddComponent<Rigidbody>();
+                Vector3 dir = (t.transform.position - transform.position).normalized;
+                const float sc = 0.5f;
+                Vector3 randomPosition = transform.position + new Vector3(Random.Range(-sc, sc), Random.Range(-sc, sc), Random.Range(-sc, sc));
+                rb.AddForceAtPosition(dir * 100f, randomPosition);
+                rb.useGravity = false;
+            }
         }
+        exploded = true;
+        rumbling = false;
     }
 }
