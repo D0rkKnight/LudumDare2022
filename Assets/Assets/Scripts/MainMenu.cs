@@ -14,6 +14,10 @@ public class MainMenu : MonoBehaviour
     {
         GameManager.startGame();
     }
+    public void MenuDebugScene()
+    {
+        SceneManager.LoadScene("IcoSpawnerScene");
+    }
     public void QuitGame()
     {
 	    Debug.Log("Quit");
