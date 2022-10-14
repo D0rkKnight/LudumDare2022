@@ -94,7 +94,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7781247155791100871}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -111,7 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb64d9898c7de32489fde82070ee155a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 5313131870354466550, guid: d1162676a7102b94d9570f74a6195d15, type: 3}
+  glowMat: {fileID: 2100000, guid: 73bddb3c5f1427e469f28701c098c607, type: 2}
+  rend: {fileID: 5622838132938586979}
+  lerpTarget: {fileID: 0}
+  collectSpeed: 1
 --- !u!54 &564927286547099120
 Rigidbody:
   m_ObjectHideFlags: 0
