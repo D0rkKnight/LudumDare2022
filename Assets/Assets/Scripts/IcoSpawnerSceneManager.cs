@@ -18,6 +18,9 @@ public class IcoSpawnerSceneManager : MonoBehaviour
     private GameObject []planetPrefabs;
 
     [SerializeField]
+    private GameObject pauseMenu;
+
+    [SerializeField]
     private int nRows=5;
 
     //distance planets should be placed from each other
@@ -83,7 +86,34 @@ public class IcoSpawnerSceneManager : MonoBehaviour
                 planets[activei * nRows + activej].GetComponent<PlanetScript>().triggerRumble(5.0f);
             }
         }
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (paused)
+                Resume();
+            else
+                Pause();
+        }
+
+    }
+
+    private bool paused = false;
+    public void Pause()
+    {
+        paused = true;
+        Time.timeScale = 0.0f;
+        if (pauseMenu)
+        {
+            pauseMenu.SetActive(true);
+        }
+    }
+    public void Resume()
+    {
+        paused = false;
+        Time.timeScale = 1.0f;
+        if (pauseMenu)
+        {
+            pauseMenu.SetActive(false);
+        }
     }
 
     private void nextPlanet()

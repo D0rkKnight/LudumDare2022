@@ -14,6 +14,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("davidDevScene");
     }
+    public void MenuDebugScene()
+    {
+        SceneManager.LoadScene("IcoSpawnerScene");
+    }
     public void QuitGame()
     {
 	    Debug.Log("Quit");
