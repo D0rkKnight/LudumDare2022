@@ -6,21 +6,31 @@ using UnityEngine;
 public class IcoSpawnerSceneManager : MonoBehaviour
 {
 
+    //TODO:
+    //Press Q and E to move planets
+    //Press Space to explode planet
+    //Press WASD to interact w/ the spinner
+    
+
     [SerializeField]
     private GameObject []planetPrefabs;
+
     [SerializeField]
     private int nRows=5;
 
+    //distance planets should be placed from each other
+    [SerializeField]
+    public float dx = 6.0f;
+
     private int activei = 0;
     private int activej = 0;
-
-
+    
+    
     private GameObject[] planets;
 
     public void instantiateObjects()
     {
         planets = new GameObject[nRows*planetPrefabs.Length];
-        float dx = 6.0f;
         float x0 = -(planetPrefabs.Length-1) * dx/2.0f;
         for(int i=0;i<planetPrefabs.Length;i++)
         {
@@ -36,6 +46,8 @@ public class IcoSpawnerSceneManager : MonoBehaviour
         }
     }
 
+
+    
     // Start is called before the first frame update
     void Start()
     {
