@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     }
     public void MenuPlayGame()
     {
-        SceneManager.LoadScene("davidDevScene");
+        GameManager.startGame();
     }
     public void QuitGame()
     {
