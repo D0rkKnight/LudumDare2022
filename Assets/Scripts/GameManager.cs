@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
             if (objInRange.Contains(obj))
             {
                 // Rocket boarding
-                if (Input.GetKeyDown(KeyCode.F))
+                if (Input.GetKeyDown(KeyCode.F) && fuel >= 10)
                 {
                     switchCam(rocket.cam);
 
@@ -72,10 +72,6 @@ public class GameManager : MonoBehaviour
                     StartCoroutine(LiftOff());
                 }
             }
-        }
-        if (fuel >= 10)
-        {
-            Debug.Log("You Win!");
         }
 
         // Update timer
@@ -93,6 +89,7 @@ public class GameManager : MonoBehaviour
             Debug.Log(wait - i);
         }
         rocketBoarded = true;
+        fuel = 0; // Out of fuel
 
         // Deparent rocket
         rocket.transform.parent = null;
