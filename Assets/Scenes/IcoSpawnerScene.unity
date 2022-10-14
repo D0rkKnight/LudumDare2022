@@ -472,8 +472,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1119.1628, y: 552.18726}
-  m_SizeDelta: {x: 845.8607, y: 217.8141}
+  m_AnchoredPosition: {x: -611.1754, y: 459.38184}
+  m_SizeDelta: {x: 1505.5846, y: 338.3407}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &429511262
 MonoBehaviour:
@@ -495,12 +495,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'QE to change planets (TODO)
+  m_text: 'QE to change planets
 
     WASD to spin planet (TODO)
 
-    Space
-    to explode planet (TODO)
+    Space to explode
+    planet
 
     Esc to pause (TODO)'
   m_isRightToLeft: 0
@@ -826,14 +826,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.21788773, y: 0, z: 0, w: 0.97597384}
+  m_LocalPosition: {x: 0, y: 5, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25.17, y: 0, z: 0}
 --- !u!1 &1092409461
 GameObject:
   m_ObjectHideFlags: 0

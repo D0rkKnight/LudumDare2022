@@ -107,7 +107,7 @@ public class PlanetScript : MonoBehaviour
         instantiateTiles();
         rumble = 1.0f;
         exploded = false;
-        triggerRumble(25.0f);
+        //triggerRumble(25.0f);
     }
 
 

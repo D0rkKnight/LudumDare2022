@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class IcoSpawnerSceneManager : MonoBehaviour
@@ -24,24 +26,28 @@ public class IcoSpawnerSceneManager : MonoBehaviour
 
     private int activei = 0;
     private int activej = 0;
+
+    private bool acceptInput = false;
     
     
     private GameObject[] planets;
 
+
+    private Vector3 planetPosition(int i,int j)
+    {
+        float x0 = -(planetPrefabs.Length - 1) * dx / 2.0f;
+        return new Vector3(x0 + i * dx, 0, j * dx);
+    }
+
     public void instantiateObjects()
     {
         planets = new GameObject[nRows*planetPrefabs.Length];
-        float x0 = -(planetPrefabs.Length-1) * dx/2.0f;
-        for(int i=0;i<planetPrefabs.Length;i++)
+        for (int i=0;i<planetPrefabs.Length;i++)
         {
             for(int j = 0; j < nRows; j++)
             {
                 planets[i * nRows + j] = Instantiate(planetPrefabs[i], transform);
-                planets[i * nRows + j].transform.localPosition = new Vector3(x0+i * dx,0,j*dx);
-            //Instantiate random tiles and rotate them into place.
-            /*GameObject obj = Instantiate(prefabList[Random.Range(0, prefabList.Length)], transform);
-                obj.transform.localPosition = (Positions[i]) * size;
-                obj.transform.rotation = Quaternion.AngleAxis(Angles[i], Axes[i]);*/
+                planets[i * nRows + j].transform.localPosition = planetPosition(i, j);
             }
         }
     }
@@ -54,12 +60,51 @@ public class IcoSpawnerSceneManager : MonoBehaviour
         instantiateObjects();
         activei=Mathf.FloorToInt(planetPrefabs.Length / 2);
         activej = 0;
-        //Destroy(planets[activei * nRows + activej]);
     }
+
 
     // Update is called once per frame
     void Update()
     {
+        transform.position=Vector3.Lerp(transform.position, -planetPosition(activei,activej), 1.0f-Mathf.Exp(-Time.deltaTime * 5f));
+        if(Input.GetKeyDown(KeyCode.Q)){
+            prevPlanet();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            nextPlanet();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if(planets[activei * nRows + activej])
+            {
+                planets[activei * nRows + activej].GetComponent<PlanetScript>().triggerRumble(5.0f);
+            }
+        }
         
+    }
+
+    private void nextPlanet()
+    {
+        activej += 1;
+        if (activej >= nRows)
+        {
+            activej = 0;
+            activei = (activei + 1) % planetPrefabs.Length;
+        }
+    }
+    private void prevPlanet()
+    {
+        activej -= 1;
+        if (activej < 0)
+        {
+            activej = nRows-1;
+            activei -= 1;
+            if (activei < 0)
+            {
+                activei = planetPrefabs.Length - 1;
+            }
+        }
     }
 }
