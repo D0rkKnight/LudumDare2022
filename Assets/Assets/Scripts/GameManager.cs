@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
             throw new System.Exception("Singleton broken");
 
         sing = this;
+
+        Debug.Log(OptionsMenu.volume);
     }
 
     // Start is called before the first frame update

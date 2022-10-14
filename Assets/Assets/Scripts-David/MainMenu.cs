@@ -16,10 +16,8 @@ public class MainMenu : MonoBehaviour
     }
     public void QuitGame()
     {
-	Debug.Log("Quit");
-	Application.Quit();
-
-        SceneManager.LoadScene("davidDevScene");
+	    Debug.Log("Quit");
+	    Application.Quit();
     }
 
     // Update is called once per frame
