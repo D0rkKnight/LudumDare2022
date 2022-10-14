@@ -15,8 +15,11 @@ This was developed over 3 days with relatively few hours put in.
  - Add UI element: nicer timer?
 
  **Menu additions:**
+ - ~~Main menu~~
+ - ~~Options menu~~
  - Pause menu (main menu, resume)
- - Sound autoplay + mute button
+ - Game over menu (Main menu, retry, quit)
+ - Mute button toggle?
 
  **Misc:**
  - Rocket particle effects
