@@ -792,6 +792,7 @@ MonoBehaviour:
   textToUpdate: {fileID: 1041400046}
   volumeSlider: {fileID: 487781808}
   timeSlider: {fileID: 873590058}
+  MainMusic: {fileID: 0}
 --- !u!1 &719601992
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,9 +11,13 @@ public class OptionsMenu : MonoBehaviour
 
     [SerializeField]
     private GameObject textToUpdate;
-    public GameObject volumeSlider;
-    public GameObject timeSlider;
+    [SerializeField]
+    private GameObject volumeSlider;
+    [SerializeField]
+    private GameObject timeSlider;
 
+    [SerializeField]
+    private GameObject MainMusic;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +27,8 @@ public class OptionsMenu : MonoBehaviour
     public void setVolume(float arg)
     {
         volume = Mathf.Clamp(arg,0,1);
+        AudioListener.volume = volume;
+        //MainMusic.GetComponent<AudioSource>().volume = volume;
     }
     public void setDuration(float arg)
     {
