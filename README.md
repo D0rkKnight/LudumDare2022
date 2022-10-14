@@ -21,6 +21,12 @@ This was developed over 3 days with relatively few hours put in.
  - Game over menu (Main menu, retry, quit)
  - Mute button toggle?
 
+ **Debug Test Scene**
+ - ~~Pause Menu~~
+ - Player Controller
+ - Particle Spawning
+ - Particle Collecting
+
  **Misc:**
  - Rocket particle effects
  - Fix rocket clipping planet

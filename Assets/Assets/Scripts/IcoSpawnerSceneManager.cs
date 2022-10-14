@@ -21,6 +21,9 @@ public class IcoSpawnerSceneManager : MonoBehaviour
     private GameObject pauseMenu;
 
     [SerializeField]
+    private GameObject planetHolder;
+
+    [SerializeField]
     private int nRows=5;
 
     //distance planets should be placed from each other
@@ -29,7 +32,6 @@ public class IcoSpawnerSceneManager : MonoBehaviour
 
     private int activei = 0;
     private int activej = 0;
-
     
     private GameObject[] planets;
 
@@ -47,7 +49,7 @@ public class IcoSpawnerSceneManager : MonoBehaviour
         {
             for(int j = 0; j < nRows; j++)
             {
-                planets[i * nRows + j] = Instantiate(planetPrefabs[i], transform);
+                planets[i * nRows + j] = Instantiate(planetPrefabs[i], planetHolder.transform);
                 planets[i * nRows + j].transform.localPosition = planetPosition(i, j);
                 planets[i * nRows + j].GetComponent<PlanetScript>().deactivate();
             }
@@ -70,7 +72,7 @@ public class IcoSpawnerSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position=Vector3.Lerp(transform.position, -planetPosition(activei,activej), 1.0f-Mathf.Exp(-Time.deltaTime * 5f));
+        planetHolder.transform.position=Vector3.Lerp(planetHolder.transform.position, -planetPosition(activei,activej), 1.0f-Mathf.Exp(-Time.deltaTime * 5f));
         if(Input.GetKeyDown(KeyCode.Q)){
             prevPlanet();
         }
