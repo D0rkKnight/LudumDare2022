@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8893475441180855676}
   - component: {fileID: 8893475441180855677}
+  - component: {fileID: -4012136438984115643}
   m_Layer: 0
   m_Name: GrassPlanet
   m_TagString: Untagged
@@ -51,6 +52,19 @@ MonoBehaviour:
   - {fileID: 8690069156276169224, guid: 22cd660ffb3ec8043a455d8ce0928882, type: 3}
   - {fileID: 2297842269038855369, guid: f879968b9a1360a4b94a84e3fea79d0c, type: 3}
   - {fileID: 2501049937145325330, guid: cbc91493721cda44c8f124c6411f74bb, type: 3}
+--- !u!114 &-4012136438984115643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893475441180855678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02319508b4796da4ebd125d63ae2962e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 100
 --- !u!1001 &8893475441947897653
 PrefabInstance:
   m_ObjectHideFlags: 0

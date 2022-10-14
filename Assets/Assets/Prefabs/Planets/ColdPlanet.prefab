@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5020147853176582698}
   - component: {fileID: 5020147853176582697}
+  - component: {fileID: 3463332599492525163}
   m_Layer: 0
   m_Name: ColdPlanet
   m_TagString: Untagged
@@ -50,6 +51,19 @@ MonoBehaviour:
   - {fileID: 4613742509048078446, guid: 614ccacdeb523f54f9977908c56a8ab8, type: 3}
   - {fileID: 4105136129123183207, guid: f340cede25e0f11449e8c8baccfe7ee0, type: 3}
   - {fileID: 2889507205946867728, guid: c5a3a0e51ac0fb44780b27ed11151b1b, type: 3}
+--- !u!114 &3463332599492525163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020147853176582696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02319508b4796da4ebd125d63ae2962e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 100
 --- !u!1001 &5020147852793786210
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7717498350955144762}
   - component: {fileID: 7717498350955144765}
+  - component: {fileID: 3013285517715224647}
   m_Layer: 0
   m_Name: BeachPlanet
   m_TagString: Untagged
@@ -51,6 +52,19 @@ MonoBehaviour:
   - {fileID: 361073260396137708, guid: d763bcdfe55ccd640b0d45376fc04137, type: 3}
   - {fileID: 664093742690992487, guid: af985966e27ce4249810fc018df387b9, type: 3}
   - {fileID: 1454448275959824952, guid: 5558c0e09f6d316469a70f1b2f786010, type: 3}
+--- !u!114 &3013285517715224647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7717498350955144760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02319508b4796da4ebd125d63ae2962e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 100
 --- !u!1001 &7717498349600496047
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -65,7 +65,7 @@ public class PlanetScript : MonoBehaviour
                     if (tiles[i])
                     {
                         tiles[i].transform.localPosition = (Positions[i]) * size + new Vector3(Random.Range(-sc, sc), Random.Range(-sc, sc), Random.Range(-sc, sc));
-                        tiles[i].transform.rotation = Quaternion.AngleAxis(Angles[i], Axes[i]);
+                        tiles[i].transform.localRotation = Quaternion.AngleAxis(Angles[i], Axes[i]);
                     }
                 }
             }
@@ -117,6 +117,19 @@ public class PlanetScript : MonoBehaviour
         updateRumble();
     }
 
+    public void activate()
+    {
+        SpinnerController sp = GetComponent<SpinnerController>();
+        if (sp)
+            sp.enabled=true;
+    }
+    public void deactivate()
+    {
+        SpinnerController sp = GetComponent<SpinnerController>();
+        if (sp)
+            sp.enabled = false;
+    }
+
     public void explode()
     {
         foreach (GameObject t in tiles)
@@ -133,5 +146,13 @@ public class PlanetScript : MonoBehaviour
         }
         exploded = true;
         rumbling = false;
+        deactivate();
+        StartCoroutine(explodeHelper());
+    }
+
+    private IEnumerator explodeHelper()
+    {
+        yield return new WaitForSeconds(3.0f);
+        destroyTiles();
     }
 }
