@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         objInRange = new List<GameObject>();
         activeCam = Camera.main;
+        startGame();
     }
 
     // Update is called once per frame
