@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public static Player player;
     public static Rocket rocket;
 
-    public float fuel = 0;
+    public static float fuel = 0;
 
     public static IcoSpawnwPrefabList ico;
     bool rocketBoarded = false;
