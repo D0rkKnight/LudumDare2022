@@ -1,8 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Net.Sockets;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class IcoSpawnerSceneManager : MonoBehaviour
@@ -25,6 +22,9 @@ public class IcoSpawnerSceneManager : MonoBehaviour
 
     [SerializeField]
     private GameObject playerRef;
+
+    [SerializeField]
+    private GameObject rocketRef;
 
     [SerializeField]
     private int nRows=5;
@@ -55,10 +55,9 @@ public class IcoSpawnerSceneManager : MonoBehaviour
                 planets[i * nRows + j] = Instantiate(planetPrefabs[i], planetHolder.transform);
                 planets[i * nRows + j].transform.localPosition = planetPosition(i, j);
                 planets[i * nRows + j].GetComponent<PlanetScript>().deactivate();
+                planets[i * nRows + j].GetComponent<PlanetScript>().size=Random.Range(1.4f,2.14f);
             }
         }
-        Debug.Log(planets[0]);
-        //.GetComponent<PlanetScript>().getTileLength()
     }
 
 
@@ -69,8 +68,11 @@ public class IcoSpawnerSceneManager : MonoBehaviour
         instantiateObjects();
         activei=Mathf.FloorToInt(planetPrefabs.Length / 2);
         activej = 0;
-        //planets[activei * nRows + activej].AddComponent<SpinnerController>();
-        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate(playerRef);
+        PlanetScript p = planets[activei * nRows + activej].GetComponent<PlanetScript>();
+        Debug.Log(p);
+        Debug.Log(rocketRef);
+        p.activate(playerRef, null);
+        p.activate(playerRef,rocketRef);
     }
 
 
@@ -132,7 +134,7 @@ public class IcoSpawnerSceneManager : MonoBehaviour
             activej = 0;
             activei = (activei + 1) % planetPrefabs.Length;
         }
-        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate(playerRef);
+        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate(playerRef, rocketRef);
     }
     private void prevPlanet()
     {
@@ -147,6 +149,6 @@ public class IcoSpawnerSceneManager : MonoBehaviour
                 activei = planetPrefabs.Length - 1;
             }
         }
-        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate(playerRef);
+        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate(playerRef, rocketRef);
     }
 }

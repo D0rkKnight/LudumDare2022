@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 
 
@@ -27,9 +28,9 @@ public class PlanetScript : MonoBehaviour
     //privately managed tile GameObjects
     private GameObject[] tiles;
 
-    public int getTileLength()
+    public GameObject[] getTiles()
     {
-        return tiles.Length;
+        return tiles;
     }
 
     //rumble 0 means don't rumble, rumble 1 means max rumble.
@@ -39,6 +40,8 @@ public class PlanetScript : MonoBehaviour
     private float rumble = 0.0f;
     private float rumbleTime = 0.0f;
     private float rumbleElapsed = 0.0f;
+    private GameObject rocketRef=null;
+
     public void triggerRumble(float rumbleBuildup)
     {
         rumbling = true;
@@ -102,6 +105,7 @@ public class PlanetScript : MonoBehaviour
             obj.transform.rotation = Quaternion.AngleAxis(Angles[i], Axes[i]);
             tiles[i] = obj;
         }
+
     }
 
 
@@ -112,7 +116,12 @@ public class PlanetScript : MonoBehaviour
         instantiateTiles();
         rumble = 1.0f;
         exploded = false;
-        //triggerRumble(25.0f);
+        if (rocketRef)
+        {
+            rocketRef.transform.SetParent(tiles[1].transform, false);
+            rocketRef.transform.localPosition=new Vector3(0.0f,0.25f,0.0f);
+            gameObject.transform.rotation = Quaternion.AngleAxis(-20.1852349051f, Vector3.right);
+        }
     }
 
 
@@ -122,7 +131,7 @@ public class PlanetScript : MonoBehaviour
         updateRumble();
     }
 
-    public void activate(GameObject playerRef=null)
+    public void activate(GameObject playerRef = null, GameObject rocketRef = null)
     {
         SpinnerController sp = GetComponent<SpinnerController>();
         if (sp)
@@ -130,13 +139,32 @@ public class PlanetScript : MonoBehaviour
             sp.enabled = true;
             sp.attachPlayer(playerRef);
         }
+        if (playerRef)
+        {
+            playerRef.transform.localPosition = new Vector3(0.0f, size + 0.15f, 0.0f);
+        }
+        
+        if (rocketRef) {
+            // Ico attached now, go to it
+            if ((tiles!=null) && tiles.Length > 0)
+            {
+                rocketRef.transform.SetParent(tiles[1].transform,false);
+                rocketRef.transform.localPosition = new Vector3(0.0f, 0.25f, 0.0f);
+                //rocketRef.transform.localPosition = new Vector3(0, 0, 0);
+            }
+            this.rocketRef = rocketRef;
+            gameObject.transform.localRotation=Quaternion.AngleAxis(-20.1852349051f,Vector3.right);
+        }
+
     }
+
     public void deactivate()
     {
         SpinnerController sp = GetComponent<SpinnerController>();
         if (sp) { 
             sp.enabled = false;
             sp.detachPlayer();
+            this.rocketRef = null;
         }
     }
 

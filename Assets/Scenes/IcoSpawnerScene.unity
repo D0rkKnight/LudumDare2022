@@ -416,6 +416,7 @@ Transform:
   - {fileID: 927222416}
   - {fileID: 1392972899}
   - {fileID: 6759990840810282358}
+  - {fileID: 1628228285}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -439,6 +440,8 @@ MonoBehaviour:
   - {fileID: 8893475441180855678, guid: 79f8bdc82b697254dbdc24346acccaf4, type: 3}
   pauseMenu: {fileID: 924285671}
   planetHolder: {fileID: 927222415}
+  playerRef: {fileID: 7060248026545104262}
+  rocketRef: {fileID: 1628228284}
   nRows: 5
   dx: 10
 --- !u!1 &375288584
@@ -1472,6 +1475,97 @@ Transform:
   m_Father: {fileID: 6759990840810282358}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1628228284 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5672871518712719912, guid: 94387e5af66142246959c288ae59aa97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1819706746}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1628228285 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1565570927450260686, guid: 94387e5af66142246959c288ae59aa97,
+    type: 3}
+  m_PrefabInstance: {fileID: 1819706746}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1819706746
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 349219628}
+    m_Modifications:
+    - target: {fileID: -713242735646426285, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565570927450260686, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565570927450260686, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565570927450260686, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565570927450260686, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565570927450260686, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565570927450260686, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565570927450260686, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565570927450260686, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565570927450260686, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565570927450260686, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565570927450260686, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672871518712719912, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_Name
+      value: Rocket
+      objectReference: {fileID: 0}
+    - target: {fileID: 5672871518712719912, guid: 94387e5af66142246959c288ae59aa97,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 94387e5af66142246959c288ae59aa97, type: 3}
 --- !u!1 &1951081106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2771,7 +2865,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -2780,7 +2874,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
