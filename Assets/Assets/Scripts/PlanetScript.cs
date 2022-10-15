@@ -27,6 +27,11 @@ public class PlanetScript : MonoBehaviour
     //privately managed tile GameObjects
     private GameObject[] tiles;
 
+    public int getTileLength()
+    {
+        return tiles.Length;
+    }
+
     //rumble 0 means don't rumble, rumble 1 means max rumble.
     //This probably should be done with a tweening library or a coroutine,
     //but this works.
@@ -117,17 +122,22 @@ public class PlanetScript : MonoBehaviour
         updateRumble();
     }
 
-    public void activate()
+    public void activate(GameObject playerRef=null)
     {
         SpinnerController sp = GetComponent<SpinnerController>();
         if (sp)
-            sp.enabled=true;
+        {
+            sp.enabled = true;
+            sp.attachPlayer(playerRef);
+        }
     }
     public void deactivate()
     {
         SpinnerController sp = GetComponent<SpinnerController>();
-        if (sp)
+        if (sp) { 
             sp.enabled = false;
+            sp.detachPlayer();
+        }
     }
 
     public void explode()

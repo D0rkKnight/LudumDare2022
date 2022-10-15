@@ -24,6 +24,9 @@ public class IcoSpawnerSceneManager : MonoBehaviour
     private GameObject planetHolder;
 
     [SerializeField]
+    private GameObject playerRef;
+
+    [SerializeField]
     private int nRows=5;
 
     //distance planets should be placed from each other
@@ -54,10 +57,12 @@ public class IcoSpawnerSceneManager : MonoBehaviour
                 planets[i * nRows + j].GetComponent<PlanetScript>().deactivate();
             }
         }
+        Debug.Log(planets[0]);
+        //.GetComponent<PlanetScript>().getTileLength()
     }
 
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,7 +70,7 @@ public class IcoSpawnerSceneManager : MonoBehaviour
         activei=Mathf.FloorToInt(planetPrefabs.Length / 2);
         activej = 0;
         //planets[activei * nRows + activej].AddComponent<SpinnerController>();
-        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate();
+        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate(playerRef);
     }
 
 
@@ -127,7 +132,7 @@ public class IcoSpawnerSceneManager : MonoBehaviour
             activej = 0;
             activei = (activei + 1) % planetPrefabs.Length;
         }
-        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate();
+        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate(playerRef);
     }
     private void prevPlanet()
     {
@@ -142,6 +147,6 @@ public class IcoSpawnerSceneManager : MonoBehaviour
                 activei = planetPrefabs.Length - 1;
             }
         }
-        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate();
+        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate(playerRef);
     }
 }
