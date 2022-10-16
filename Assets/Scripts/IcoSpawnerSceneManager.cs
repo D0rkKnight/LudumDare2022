@@ -1,8 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Net.Sockets;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class IcoSpawnerSceneManager : MonoBehaviour
@@ -21,6 +18,15 @@ public class IcoSpawnerSceneManager : MonoBehaviour
     private GameObject pauseMenu;
 
     [SerializeField]
+    private GameObject planetHolder;
+
+    [SerializeField]
+    private GameObject playerRef;
+
+    [SerializeField]
+    private GameObject rocketRef;
+
+    [SerializeField]
     private int nRows=5;
 
     //distance planets should be placed from each other
@@ -29,7 +35,6 @@ public class IcoSpawnerSceneManager : MonoBehaviour
 
     private int activei = 0;
     private int activej = 0;
-
     
     private GameObject[] planets;
 
@@ -47,30 +52,34 @@ public class IcoSpawnerSceneManager : MonoBehaviour
         {
             for(int j = 0; j < nRows; j++)
             {
-                planets[i * nRows + j] = Instantiate(planetPrefabs[i], transform);
+                planets[i * nRows + j] = Instantiate(planetPrefabs[i], planetHolder.transform);
                 planets[i * nRows + j].transform.localPosition = planetPosition(i, j);
                 planets[i * nRows + j].GetComponent<PlanetScript>().deactivate();
+                planets[i * nRows + j].GetComponent<PlanetScript>().size=Random.Range(1.4f,2.14f);
             }
         }
     }
 
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
         instantiateObjects();
         activei=Mathf.FloorToInt(planetPrefabs.Length / 2);
         activej = 0;
-        //planets[activei * nRows + activej].AddComponent<SpinnerController>();
-        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate();
+        PlanetScript p = planets[activei * nRows + activej].GetComponent<PlanetScript>();
+        Debug.Log(p);
+        Debug.Log(rocketRef);
+        p.activate(playerRef, null);
+        p.activate(playerRef,rocketRef);
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        transform.position=Vector3.Lerp(transform.position, -planetPosition(activei,activej), 1.0f-Mathf.Exp(-Time.deltaTime * 5f));
+        planetHolder.transform.position=Vector3.Lerp(planetHolder.transform.position, -planetPosition(activei,activej), 1.0f-Mathf.Exp(-Time.deltaTime * 5f));
         if(Input.GetKeyDown(KeyCode.Q)){
             prevPlanet();
         }
@@ -125,7 +134,7 @@ public class IcoSpawnerSceneManager : MonoBehaviour
             activej = 0;
             activei = (activei + 1) % planetPrefabs.Length;
         }
-        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate();
+        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate(playerRef, rocketRef);
     }
     private void prevPlanet()
     {
@@ -140,6 +149,6 @@ public class IcoSpawnerSceneManager : MonoBehaviour
                 activei = planetPrefabs.Length - 1;
             }
         }
-        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate();
+        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate(playerRef, rocketRef);
     }
 }
