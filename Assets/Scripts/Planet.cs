@@ -162,7 +162,7 @@ public class Planet : MonoBehaviour
 
     public void deactivate()
     {
-        SpinnerController sp = GetComponent<SpinnerController>();
+        Spinner sp = GetComponent<Spinner>();
         if (sp) { 
             sp.enabled = false;
             sp.detachPlayer();
@@ -188,9 +188,6 @@ public class Planet : MonoBehaviour
         if (sp)
             sp.enabled = false;
 
-        SpinnerController sp2 = GetComponent<SpinnerController>();
-        if (sp2)
-            sp2.enabled = false;
         /*
          * 
         exploded = true;

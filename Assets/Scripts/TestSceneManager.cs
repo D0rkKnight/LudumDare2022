@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IcoSpawnerSceneManager : MonoBehaviour
+public class TestSceneManager : MonoBehaviour
 {
 
     //TODO:
