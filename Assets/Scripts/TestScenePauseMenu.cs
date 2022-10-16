@@ -8,6 +8,6 @@ public class TestScenePauseMenu : MonoBehaviour
     public void OpenMainMenu()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene("StartMenu");
+        SceneManager.LoadScene("MainScene");
     }
 }

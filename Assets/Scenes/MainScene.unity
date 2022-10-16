@@ -262,6 +262,31 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1585021685103905153, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585021685103905153, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585021685401186037, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585021685401186037, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585021685989201728, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5313131870354466544, guid: d1162676a7102b94d9570f74a6195d15,
         type: 3}
       propertyPath: m_RootOrder
