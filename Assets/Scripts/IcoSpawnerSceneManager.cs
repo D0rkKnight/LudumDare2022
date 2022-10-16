@@ -24,7 +24,7 @@ public class IcoSpawnerSceneManager : MonoBehaviour
     private GameObject playerRef;
 
     [SerializeField]
-    private GameObject rocketRef;
+    private Rocket rocketRef;
 
     [SerializeField]
     private int nRows=5;
@@ -60,8 +60,6 @@ public class IcoSpawnerSceneManager : MonoBehaviour
         }
     }
 
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -69,9 +67,7 @@ public class IcoSpawnerSceneManager : MonoBehaviour
         activei=Mathf.FloorToInt(planetPrefabs.Length / 2);
         activej = 0;
         PlanetScript p = planets[activei * nRows + activej].GetComponent<PlanetScript>();
-        Debug.Log(p);
-        Debug.Log(rocketRef);
-        p.activate(playerRef, null);
+        //p.activate(playerRef, null);
         p.activate(playerRef,rocketRef);
     }
 

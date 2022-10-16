@@ -8,7 +8,6 @@ public class TestScenePlayerScript : MonoBehaviour
     public Transform camFocus;
     public Camera cam;
 
-
     void FixedUpdate()
     {
         float hor = Input.GetAxis("Mouse X");

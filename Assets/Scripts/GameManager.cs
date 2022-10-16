@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static List<GameObject> objInRange;
     public GameObject Ball;
+    bool rocketBoarded = false;
+    public IcoSpawnwPrefabList icoPrefab;
+    public Rocket rocketPrefab;
+    public Camera freeCam;
+
+
+
+    public static List<GameObject> objInRange;
     public static Player player;
     public static Rocket rocket;
 
     public static float fuel = 0;
 
     public static IcoSpawnwPrefabList ico;
-    bool rocketBoarded = false;
-
-    public IcoSpawnwPrefabList icoPrefab;
-    public Rocket rocketPrefab;
 
     public static float timeLeft = 10f;
 
@@ -25,8 +28,6 @@ public class GameManager : MonoBehaviour
     public static bool inPlay = false;
 
     public static Camera activeCam;
-    public Camera freeCam;
-
 
     public static GameManager sing;
 
@@ -38,7 +39,6 @@ public class GameManager : MonoBehaviour
 
         sing = this;
 
-        Debug.Log(OptionsMenu.volume);
     }
 
     // Start is called before the first frame update
@@ -145,7 +145,8 @@ public class GameManager : MonoBehaviour
         if (rocket == null)
         {
             // Spawn rocket
-            Rocket rok = Instantiate(sing.rocketPrefab, ico.tiles[0].transform);
+            Rocket rok = Instantiate(sing.rocketPrefab);
+            ico.attachRocket(rok);
             rok.transform.localPosition = Vector3.up * 0.5f;
             rok.transform.localRotation = Quaternion.identity;
         }
@@ -158,7 +159,7 @@ public class GameManager : MonoBehaviour
         if (ico != null)
             Destroy(ico);
 
-        Instantiate(icoPrefab);
+        ico = Instantiate(icoPrefab);
     }
 
     // Assumes rocket is attached to a tile
@@ -170,9 +171,10 @@ public class GameManager : MonoBehaviour
         player.gameObject.SetActive(false);
 
         rocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
-
+       
         // Ico attached now, go to it
-        rocket.transform.parent = ico.tiles[0].transform;
+        ico.attachRocket(rocket);
+        //rocket.transform.parent = ico.tiles[0].transform;
 
         // Freeze for landing
         rocket.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;

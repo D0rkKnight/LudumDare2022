@@ -49,34 +49,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 2
-  offset: {x: 0, y: 0, z: 0}
   prefabList:
   - {fileID: 3726353453051726953, guid: 345135296b11ccc4faccc0f848d66d20, type: 3}
   - {fileID: 5967615016121237862, guid: 827367f1d1b65a74ab4a516c9722541d, type: 3}
   - {fileID: 3971452049435637261, guid: 448112ed3ed22154cba6f413e1887c20, type: 3}
-  rocketPrefab: {fileID: -713242735646426285, guid: 94387e5af66142246959c288ae59aa97,
-    type: 3}
-  tiles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  tiles: []
 --- !u!114 &2500425283263765841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,9 +71,6 @@ MonoBehaviour:
   gravityValue: 9.81
   playerSpeed: 70
   sensitivity: 0
-  Core: {fileID: 3346775259068188967}
-  player: {fileID: 0}
-  rocket: {fileID: 0}
 --- !u!114 &2500425283263765840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,12 +258,6 @@ PrefabInstance:
 --- !u!4 &2682442170537022365 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: da8f15856c78e3545b0847db7f2d60b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 2500425284396676214}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3346775259068188967 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: da8f15856c78e3545b0847db7f2d60b9,
     type: 3}
   m_PrefabInstance: {fileID: 2500425284396676214}
   m_PrefabAsset: {fileID: 0}
