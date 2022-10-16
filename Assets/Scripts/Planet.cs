@@ -72,7 +72,7 @@ public class Planet : MonoBehaviour
             rumble = rumbleTween(rumbleElapsed / rumbleTime);
             if (rumble > 0.0f)
             {
-                float sc = rumble * 0.1f; //scale for position rumbling
+                float sc = rumble * 0.08f; //scale for position rumbling
                 for (var i = 0; i < 20; i++)
                 {
                     if (tiles[i])
@@ -82,10 +82,6 @@ public class Planet : MonoBehaviour
                         
                     }
                 }
-            }
-            if(rumbleElapsed/rumbleTime > 1.0f)
-            {
-                explode();
             }
         }
     }
@@ -188,12 +184,8 @@ public class Planet : MonoBehaviour
         if (sp)
             sp.enabled = false;
 
-        /*
-         * 
         exploded = true;
         rumbling = false;
-        deactivate();
-        StartCoroutine(explodeHelper());*/
     }
 
 }

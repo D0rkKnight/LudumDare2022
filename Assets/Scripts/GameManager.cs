@@ -149,9 +149,10 @@ public class GameManager : MonoBehaviour
         {
             // Spawn rocket
             Rocket rok = Instantiate(sing.rocketPrefab);
+            /*
             ico.attachRocket(rok);
             rok.transform.localPosition = Vector3.up * 0.5f;
-            rok.transform.localRotation = Quaternion.identity;
+            rok.transform.localRotation = Quaternion.identity;*/
         }
 
         sing.StartCoroutine(sing.landRocket());
@@ -176,7 +177,7 @@ public class GameManager : MonoBehaviour
         rocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
        
         // Ico attached now, go to it
-        ico.attachRocket(rocket);
+        //ico.attachRocket(rocket);
         //rocket.transform.parent = ico.tiles[0].transform;
 
         // Freeze for landing
@@ -185,21 +186,22 @@ public class GameManager : MonoBehaviour
         // Rotate planet so that up is aligned with the rocket.
         rocket.transform.localRotation = Quaternion.identity;
         rocket.transform.localPosition = Vector3.up * 10;
-        ico.transform.rotation = Quaternion.Inverse(rocket.transform.rotation);
+        //ico.transform.rotation = Quaternion.Inverse(rocket.transform.rotation);
 
         float timestamp = Time.time + 3;
         while (Time.time < timestamp)
         {
-            rocket.transform.localPosition = Vector3.Lerp(rocket.transform.localPosition, Vector3.up * 0, Time.deltaTime * 2f);
+            rocket.transform.localPosition = Vector3.Lerp(rocket.transform.localPosition, Vector3.up * (ico.size), Time.deltaTime * 2f);
             yield return new WaitForEndOfFrame();
         }
+        
+        ico.attachRocket(rocket);
 
         // Dump player back out
         player.gameObject.SetActive(true);
         timeLeft = 10f;
+        ico.triggerRumble(timeLeft);
         Spinner sp = ico.GetComponent<Spinner>();
-        Debug.Log("Spinner:");
-        Debug.Log(sp);
         ico.GetComponent<Spinner>().attachPlayer(player);
 
         // Swap cam views back to player
