@@ -6,11 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public GameObject Ball;
     bool rocketBoarded = false;
-    public PlanetScript icoPrefab;
+    public Planet icoPrefab;
     public Rocket rocketPrefab;
     public Camera freeCam;
-
-
 
     public static List<GameObject> objInRange;
     public static Player player;
@@ -18,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public static float fuel = 0;
 
-    public static PlanetScript ico;
+    public static Planet ico;
 
     public static float timeLeft = 10f;
 
