@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5300191305792144086}
   - component: {fileID: 5300191305792144087}
-  - component: {fileID: -2322916594608023739}
+  - component: {fileID: -6562681203416721330}
   m_Layer: 0
   m_Name: CandyPlanet
   m_TagString: Untagged
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5300191305792144080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52,7 +52,7 @@ MonoBehaviour:
   - {fileID: 7857723096736113629, guid: 67a210d8ade756a439b5955d8b8836c4, type: 3}
   - {fileID: 7723893429934541072, guid: 0eac15ba2839bf54d875a3adcacc7ced, type: 3}
   - {fileID: 2638938224891169084, guid: 934f04dad7bca7342b6777cf6a286552, type: 3}
---- !u!114 &-2322916594608023739
+--- !u!114 &-6562681203416721330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5300191305792144080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02319508b4796da4ebd125d63ae2962e, type: 3}
+  m_Script: {fileID: 11500000, guid: ff586cd57456cc1448583a8eae13c490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 100

@@ -21,7 +21,7 @@ public class IcoSpawnerSceneManager : MonoBehaviour
     private GameObject planetHolder;
 
     [SerializeField]
-    private GameObject playerRef;
+    private Player playerRef;
 
     [SerializeField]
     private Rocket rocketRef;
@@ -55,7 +55,9 @@ public class IcoSpawnerSceneManager : MonoBehaviour
                 planets[i * nRows + j] = Instantiate(planetPrefabs[i], planetHolder.transform);
                 planets[i * nRows + j].transform.localPosition = planetPosition(i, j);
                 planets[i * nRows + j].GetComponent<PlanetScript>().deactivate();
+                planets[i * nRows + j].GetComponent<Spinner>().enabled = false;
                 planets[i * nRows + j].GetComponent<PlanetScript>().size=Random.Range(1.4f,2.14f);
+
             }
         }
     }
@@ -66,9 +68,7 @@ public class IcoSpawnerSceneManager : MonoBehaviour
         instantiateObjects();
         activei=Mathf.FloorToInt(planetPrefabs.Length / 2);
         activej = 0;
-        PlanetScript p = planets[activei * nRows + activej].GetComponent<PlanetScript>();
-        //p.activate(playerRef, null);
-        p.activate(playerRef,rocketRef);
+        activatePlanet(planets[activei * nRows + activej]);
     }
 
 
@@ -121,16 +121,28 @@ public class IcoSpawnerSceneManager : MonoBehaviour
         }
     }
 
+    private void deactivatePlanet(GameObject arg)
+    {
+        arg.GetComponent<PlanetScript>().deactivate();
+        arg.GetComponent<Spinner>().enabled = false;
+    }
+    private void activatePlanet(GameObject arg)
+    {
+        arg.GetComponent<PlanetScript>().activate(playerRef,rocketRef);
+        arg.GetComponent<Spinner>().enabled = true;
+        arg.GetComponent<Spinner>().attachPlayer(playerRef);
+    }
+
     private void nextPlanet()
     {
-        planets[activei * nRows + activej].GetComponent<PlanetScript>().deactivate();
+        deactivatePlanet(planets[activei * nRows + activej]);
         activej += 1;
         if (activej >= nRows)
         {
             activej = 0;
             activei = (activei + 1) % planetPrefabs.Length;
         }
-        planets[activei * nRows + activej].GetComponent<PlanetScript>().activate(playerRef, rocketRef);
+        activatePlanet(planets[activei * nRows + activej]);
     }
     private void prevPlanet()
     {

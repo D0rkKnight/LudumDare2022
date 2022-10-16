@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2500425283263765846}
   - component: {fileID: 2500425283263765841}
   - component: {fileID: 2500425283263765840}
+  - component: {fileID: 1888195276565752315}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Untagged
@@ -53,7 +54,6 @@ MonoBehaviour:
   - {fileID: 3726353453051726953, guid: 345135296b11ccc4faccc0f848d66d20, type: 3}
   - {fileID: 5967615016121237862, guid: 827367f1d1b65a74ab4a516c9722541d, type: 3}
   - {fileID: 3971452049435637261, guid: 448112ed3ed22154cba6f413e1887c20, type: 3}
-  tiles: []
 --- !u!114 &2500425283263765841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,6 +84,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 7781247155791100871, guid: 35264db230e2a7247865da8b814ff293, type: 3}
+--- !u!114 &1888195276565752315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2500425283263765845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 118d3606accb99a498ef0893e7efb2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 1.64728
+  prefabList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &2500425284296534670
 GameObject:
   m_ObjectHideFlags: 0

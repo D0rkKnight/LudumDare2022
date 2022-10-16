@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7717498350955144762}
   - component: {fileID: 7717498350955144765}
-  - component: {fileID: 3013285517715224647}
+  - component: {fileID: 1533160066720867887}
   m_Layer: 0
   m_Name: BeachPlanet
   m_TagString: Untagged
@@ -52,7 +52,7 @@ MonoBehaviour:
   - {fileID: 1012417136108676141, guid: 488f6cd88a2f1584b9705e8fb9791287, type: 3}
   - {fileID: 8761250373898101604, guid: 910923da41ddbab45ac441c9b49cf52f, type: 3}
   - {fileID: 8754039121590351067, guid: 94231267d1b66004493da6ee7f19b367, type: 3}
---- !u!114 &3013285517715224647
+--- !u!114 &1533160066720867887
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7717498350955144760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02319508b4796da4ebd125d63ae2962e, type: 3}
+  m_Script: {fileID: 11500000, guid: ff586cd57456cc1448583a8eae13c490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 100

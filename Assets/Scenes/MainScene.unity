@@ -347,6 +347,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5313131870354466551, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: Ball
+      value: 
+      objectReference: {fileID: 7781247155791100871, guid: 35264db230e2a7247865da8b814ff293,
+        type: 3}
+    - target: {fileID: 5313131870354466551, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: icoPrefab
+      value: 
+      objectReference: {fileID: 8893475441180855677, guid: 79f8bdc82b697254dbdc24346acccaf4,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1162676a7102b94d9570f74a6195d15, type: 3}
 --- !u!1 &1074413543
@@ -561,6 +573,10 @@ PrefabInstance:
     - target: {fileID: 330585548, guid: 2a0c307d319fc574793d9d82de904369, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549391888, guid: 2a0c307d319fc574793d9d82de904369, type: 3}
+      propertyPath: collide
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8328305817423162436, guid: 2a0c307d319fc574793d9d82de904369,
         type: 3}

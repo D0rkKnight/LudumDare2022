@@ -136,14 +136,8 @@ public class PlanetScript : MonoBehaviour
         updateRumble();
     }
 
-    public void activate(GameObject playerRef = null, Rocket rocketRef = null)
+    public void activate(Player playerRef = null, Rocket rocketRef = null)
     {
-        SpinnerController sp = GetComponent<SpinnerController>();
-        if (sp)
-        {
-            sp.enabled = true;
-            sp.attachPlayer(playerRef);
-        }
         if (playerRef)
         {
             playerRef.transform.localPosition = new Vector3(0.0f, size + 0.15f, 0.0f);
@@ -180,25 +174,29 @@ public class PlanetScript : MonoBehaviour
     {
         foreach (GameObject t in tiles)
         {
-            if (t)
-            {
-                Rigidbody rb = t.AddComponent<Rigidbody>();
-                Vector3 dir = (t.transform.position - transform.position).normalized;
-                const float sc = 0.5f;
-                Vector3 randomPosition = transform.position + new Vector3(Random.Range(-sc, sc), Random.Range(-sc, sc), Random.Range(-sc, sc));
-                rb.AddForceAtPosition(dir * 100f, randomPosition);
-                rb.useGravity = false;
-            }
+            Rigidbody rb = t.AddComponent<Rigidbody>();
+            Vector3 dir = (t.transform.position - transform.position).normalized;
+            const float sc = 0.5f;
+            Vector3 randomPosition = transform.position + new Vector3(Random.Range(-sc, sc), Random.Range(-sc, sc), Random.Range(-sc, sc));
+            rb.AddForceAtPosition(dir * 100f, randomPosition);
+            rb.useGravity = false;
         }
+        Destroy(gameObject, 3);
+
+        // Pause spin
+        Spinner sp = GetComponent<Spinner>();
+        if (sp)
+            sp.enabled = false;
+
+        SpinnerController sp2 = GetComponent<SpinnerController>();
+        if (sp2)
+            sp2.enabled = false;
+        /*
+         * 
         exploded = true;
         rumbling = false;
         deactivate();
-        StartCoroutine(explodeHelper());
+        StartCoroutine(explodeHelper());*/
     }
 
-    private IEnumerator explodeHelper()
-    {
-        yield return new WaitForSeconds(3.0f);
-        destroyTiles();
-    }
 }

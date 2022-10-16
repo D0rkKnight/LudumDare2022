@@ -5,38 +5,33 @@ using UnityEngine;
 public class Spinner : MonoBehaviour
 {
     private Vector3 surfVelo;
-    public bool grounded;
-    public float jumpHeight;
-    public float gravityValue = 9.81f;
-    public float playerSpeed = 1f;
-    public float sensitivity;
-    //private Transform spawner = GameObject.Find("IcoSpawner").GetComponent<Transform>();
+    public float playerSpeed = 100f;
 
-    // Start is called before the first frame update
-    void Start()
+    private Player playerRef;
+
+    public void attachPlayer(Player playerRef)
     {
-        //Transform spawner = GameObject.Find("IcoSpawner").GetComponent<Transform>();
+        this.playerRef = playerRef;
+    }
+    public void detachPlayer()
+    {
+        playerRef = null;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey("left shift"))
-        {
-            playerSpeed = 200f;
-        }
-
         Vector2 move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         surfVelo = move * playerSpeed;
-        bool spinning = true;
-
-        if (spinning && GameManager.player != null && GameManager.ico != null)
+        GameObject core = gameObject;
+        Vector3 d1 = Vector3.right, d2 = Vector3.forward;
+        if (playerRef)
         {
-            GameObject Core = GameManager.ico.gameObject;
-            transform.RotateAround(Core.transform.position, GameManager.player.transform.right, -move.y * Time.deltaTime * playerSpeed);
-            transform.RotateAround(Core.transform.position, GameManager.player.transform.forward, move.x * Time.deltaTime * playerSpeed);
+            d1 = playerRef.transform.right;
+            d2 = playerRef.transform.forward;
         }
-        
+        transform.RotateAround(core.transform.position, d1, -move.y * Time.deltaTime * playerSpeed);
+        transform.RotateAround(core.transform.position, d2, move.x * Time.deltaTime * playerSpeed);
     }
-    
+
 }

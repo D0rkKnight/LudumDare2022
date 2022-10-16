@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject Ball;
     bool rocketBoarded = false;
-    public IcoSpawnwPrefabList icoPrefab;
+    public PlanetScript icoPrefab;
     public Rocket rocketPrefab;
     public Camera freeCam;
 
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     public static float fuel = 0;
 
-    public static IcoSpawnwPrefabList ico;
+    public static PlanetScript ico;
 
     public static float timeLeft = 10f;
 
@@ -46,6 +46,11 @@ public class GameManager : MonoBehaviour
     {
         objInRange = new List<GameObject>();
         activeCam = Camera.main;
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        if (!player)
+        {
+            Debug.Log("Couldn't find player object in GameManager!");
+        }
     }
 
     // Update is called once per frame
@@ -194,6 +199,10 @@ public class GameManager : MonoBehaviour
         // Dump player back out
         player.gameObject.SetActive(true);
         timeLeft = 10f;
+        Spinner sp = ico.GetComponent<Spinner>();
+        Debug.Log("Spinner:");
+        Debug.Log(sp);
+        ico.GetComponent<Spinner>().attachPlayer(player);
 
         // Swap cam views back to player
         switchCam(player.cam);

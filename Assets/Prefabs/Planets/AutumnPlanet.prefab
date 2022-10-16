@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7167950543737335367}
   - component: {fileID: 7167950543737335366}
-  - component: {fileID: -3716942977744830534}
+  - component: {fileID: 2788143680062473061}
   m_Layer: 0
   m_Name: AutumnPlanet
   m_TagString: Untagged
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7167950543737335361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52,7 +52,7 @@ MonoBehaviour:
   - {fileID: 2873563374047149013, guid: f26b0bf275615984697b1f4e954d10d4, type: 3}
   - {fileID: 4717189506394653562, guid: 59f9bc64cf01bbd4da737ace1a3f027a, type: 3}
   - {fileID: 4425232594374391969, guid: 7dbb48942d5a24146824b248d6e2585b, type: 3}
---- !u!114 &-3716942977744830534
+--- !u!114 &2788143680062473061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7167950543737335361}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02319508b4796da4ebd125d63ae2962e, type: 3}
+  m_Script: {fileID: 11500000, guid: ff586cd57456cc1448583a8eae13c490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 100

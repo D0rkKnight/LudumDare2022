@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5020147853176582698}
   - component: {fileID: 5020147853176582697}
-  - component: {fileID: 3463332599492525163}
+  - component: {fileID: -4405889956169193838}
   m_Layer: 0
   m_Name: ColdPlanet
   m_TagString: Untagged
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5020147853176582696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -51,7 +51,7 @@ MonoBehaviour:
   - {fileID: 3429717585683715402, guid: 7816513c4eaa6c7418261c3684a1fa14, type: 3}
   - {fileID: 3541427960870121622, guid: 81fe89950e9e71044a394e7a708c8d40, type: 3}
   - {fileID: 7743696752934171107, guid: b12f5a1b98119b74daf0eebc90e3529b, type: 3}
---- !u!114 &3463332599492525163
+--- !u!114 &-4405889956169193838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5020147853176582696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02319508b4796da4ebd125d63ae2962e, type: 3}
+  m_Script: {fileID: 11500000, guid: ff586cd57456cc1448583a8eae13c490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 100

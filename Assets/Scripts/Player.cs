@@ -9,10 +9,12 @@ public class Player : MonoBehaviour
     public Transform camFocus;
     public Camera cam;
 
+    public bool collide=true;
+
     // Start is called before the first frame update
     void Awake()
     {
-        GameManager.player = this;
+
     }
 
     // Update is called once per frame
@@ -32,11 +34,13 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GameManager.objInRange.Add(other.gameObject);
+        if(collide)
+            GameManager.objInRange.Add(other.gameObject);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        GameManager.objInRange.Remove(other.gameObject);
+        if(collide)
+            GameManager.objInRange.Remove(other.gameObject);
     }
 }
