@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public GameObject Ball;
     bool rocketBoarded = false;
-    public Planet icoPrefab;
+    public Planet []planetPrefabs;
+    private int curPlanet = 0; //counts from 0 to planetPrefabs.Length;
     public Rocket rocketPrefab;
     public Camera freeCam;
 
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
             throw new System.Exception("Singleton broken");
 
         sing = this;
-
+        curPlanet = 0;
     }
 
     // Start is called before the first frame update
@@ -149,10 +150,6 @@ public class GameManager : MonoBehaviour
         {
             // Spawn rocket
             Rocket rok = Instantiate(sing.rocketPrefab);
-            /*
-            ico.attachRocket(rok);
-            rok.transform.localPosition = Vector3.up * 0.5f;
-            rok.transform.localRotation = Quaternion.identity;*/
         }
 
         sing.StartCoroutine(sing.landRocket());
@@ -163,7 +160,8 @@ public class GameManager : MonoBehaviour
         if (ico != null)
             Destroy(ico);
 
-        ico = Instantiate(icoPrefab);
+        ico = Instantiate(planetPrefabs[curPlanet]);
+        curPlanet=(curPlanet+1)%planetPrefabs.Length;
     }
 
     // Assumes rocket is attached to a tile
@@ -176,10 +174,6 @@ public class GameManager : MonoBehaviour
 
         rocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
        
-        // Ico attached now, go to it
-        //ico.attachRocket(rocket);
-        //rocket.transform.parent = ico.tiles[0].transform;
-
         // Freeze for landing
         rocket.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 

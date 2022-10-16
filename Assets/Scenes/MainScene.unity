@@ -359,6 +359,41 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8893475441180855677, guid: 79f8bdc82b697254dbdc24346acccaf4,
         type: 3}
+    - target: {fileID: 5313131870354466551, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: planetPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5313131870354466551, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: planetPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8893475441180855677, guid: 79f8bdc82b697254dbdc24346acccaf4,
+        type: 3}
+    - target: {fileID: 5313131870354466551, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: planetPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 7717498350955144765, guid: 3ceb9a7989d7f1643a5525746bfadbfc,
+        type: 3}
+    - target: {fileID: 5313131870354466551, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: planetPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 7167950543737335366, guid: 7c81c968b3348924f8f286860cf63d29,
+        type: 3}
+    - target: {fileID: 5313131870354466551, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: planetPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 5020147853176582697, guid: 4bc6b2a258b361240b04a4e19a813de2,
+        type: 3}
+    - target: {fileID: 5313131870354466551, guid: d1162676a7102b94d9570f74a6195d15,
+        type: 3}
+      propertyPath: planetPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 5300191305792144087, guid: 701c8ff40675b3a4aacea8545762cb48,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1162676a7102b94d9570f74a6195d15, type: 3}
 --- !u!1 &1074413543
