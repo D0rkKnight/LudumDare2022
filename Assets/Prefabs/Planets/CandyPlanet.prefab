@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5300191305792144086}
   - component: {fileID: 5300191305792144087}
   - component: {fileID: -6562681203416721330}
+  - component: {fileID: 1025966647291916589}
   m_Layer: 0
   m_Name: CandyPlanet
   m_TagString: Untagged
@@ -65,6 +66,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 100
+--- !u!114 &1025966647291916589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300191305792144080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76536cd81387174495612d496066bfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 7781247155791100871, guid: 35264db230e2a7247865da8b814ff293,
+    type: 3}
+  nToSpawn: 20
 --- !u!1001 &5300191306473349441
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7717498350955144762}
   - component: {fileID: 7717498350955144765}
   - component: {fileID: 1533160066720867887}
+  - component: {fileID: -7953909233277445509}
   m_Layer: 0
   m_Name: BeachPlanet
   m_TagString: Untagged
@@ -65,6 +66,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 100
+--- !u!114 &-7953909233277445509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7717498350955144760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76536cd81387174495612d496066bfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 7781247155791100871, guid: 35264db230e2a7247865da8b814ff293,
+    type: 3}
+  nToSpawn: 20
 --- !u!1001 &7717498349600496047
 PrefabInstance:
   m_ObjectHideFlags: 0

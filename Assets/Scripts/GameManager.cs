@@ -135,6 +135,7 @@ public class GameManager : MonoBehaviour
 
         startReady = true; // Toggle restart flip flop
         sing.uiManager.setStartMenuActive(true);
+        sing.uiManager.setHUDActive(false);
 
 
         // Enable cursor for UI interaction
@@ -147,6 +148,7 @@ public class GameManager : MonoBehaviour
         gameIsOver = false;
         startReady = false;
         sing.uiManager.setStartMenuActive(false);
+        sing.uiManager.setHUDActive(false);
         restartReady = false;
         inPlay = true;
 
@@ -208,6 +210,8 @@ public class GameManager : MonoBehaviour
 
         // Swap cam views back to player
         switchCam(player.cam);
+
+        sing.uiManager.setHUDActive(true);
     }
 
     public static void switchCam(Camera cam)

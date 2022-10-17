@@ -28,7 +28,11 @@ public class UIManager : MonoBehaviour
     public void setStartMenuActive(bool arg)
     {
         startMenu.SetActive(arg);
-        hud.SetActive(!arg);
+    }
+
+    public void setHUDActive(bool arg)
+    {
+        hud.SetActive(arg);
     }
     void Update()
     {
