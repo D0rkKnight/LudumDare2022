@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
     public static GameManager sing;
 
 
+    public UIManager uiManager;
+
+
     private void Awake()
     {
         if (sing != null)
@@ -83,6 +86,8 @@ public class GameManager : MonoBehaviour
             StartCoroutine(explode());
 
         timeLeft -= Time.deltaTime;
+        uiManager.setTimerTime(timeLeft);
+        uiManager.setFuelText(8);
     }
     IEnumerator LiftOff()
     {
@@ -129,6 +134,8 @@ public class GameManager : MonoBehaviour
         player.gameObject.SetActive(false);
 
         startReady = true; // Toggle restart flip flop
+        sing.uiManager.setStartMenuActive(true);
+
 
         // Enable cursor for UI interaction
         Cursor.visible = true;
@@ -139,6 +146,7 @@ public class GameManager : MonoBehaviour
     {
         gameIsOver = false;
         startReady = false;
+        sing.uiManager.setStartMenuActive(false);
         restartReady = false;
         inPlay = true;
 
