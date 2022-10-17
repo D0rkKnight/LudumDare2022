@@ -210,7 +210,6 @@ public class GameManager : MonoBehaviour
 
         // Swap cam views back to player
         switchCam(player.cam);
-
         sing.uiManager.setHUDActive(true);
     }
 
