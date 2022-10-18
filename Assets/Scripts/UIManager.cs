@@ -11,16 +11,14 @@ public class UIManager : MonoBehaviour
     public GameObject timer;
     public GameObject fuelText;
 
-    void Start()
-    {
-        
-    }
 
     public void setTimerTime(float arg)
     {
+        if (arg < 0)
+            arg = 0;
         timer.GetComponent<TextMeshProUGUI>().SetText("Time left: "+arg.ToString("0s"));
     }
-    public void setFuelText(int arg)
+    public void setFuelText(float arg)
     {
         fuelText.GetComponent<TextMeshProUGUI>().SetText("Fuel: " + arg.ToString()+"/10");
     }
@@ -33,9 +31,5 @@ public class UIManager : MonoBehaviour
     public void setHUDActive(bool arg)
     {
         hud.SetActive(arg);
-    }
-    void Update()
-    {
-
     }
 }

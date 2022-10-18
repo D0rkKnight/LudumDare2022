@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class collision : MonoBehaviour
 {
-
     public Material glowMat;
     public Renderer rend;
 
-    public Transform lerpTarget = null;
-    public float collectSpeed = 1f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Transform lerpTarget = null;
+    private bool collected = false;
+    public float collectSpeed = 1f;
 
     // Update is called once per frame
     void Update()
@@ -26,8 +21,9 @@ public class collision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !collected)
         {
+            collected = true;
             Destroy(gameObject, 1);
             GameManager.fuel += 1;
 

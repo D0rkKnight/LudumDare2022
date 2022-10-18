@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
         timeLeft -= Time.deltaTime;
         uiManager.setTimerTime(timeLeft);
-        uiManager.setFuelText(8);
+        uiManager.setFuelText(fuel);
     }
     IEnumerator LiftOff()
     {
@@ -171,6 +171,7 @@ public class GameManager : MonoBehaviour
             Destroy(ico);
 
         ico = Instantiate(planetPrefabs[curPlanet]);
+        ico.size = 2.3f;
         curPlanet=(curPlanet+1)%planetPrefabs.Length;
     }
 
