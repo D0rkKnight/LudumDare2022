@@ -70,7 +70,7 @@ public class Planet : MonoBehaviour
             //advance time and add random positions to transformations.
             rumbleElapsed += Time.deltaTime;
             rumble = rumbleTween(rumbleElapsed / rumbleTime);
-            if (rumble > 0.0f)
+            if (rumble > 0.0f && Time.timeScale>0)
             {
                 float sc = rumble * 0.08f; //scale for position rumbling
                 for (var i = 0; i < 20; i++)

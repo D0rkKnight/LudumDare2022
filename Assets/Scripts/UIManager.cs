@@ -7,6 +7,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public GameObject startMenu;
+    public GameObject pauseMenu;
     public GameObject hud;
     public GameObject timer;
     public GameObject fuelText;
@@ -53,5 +54,13 @@ public class UIManager : MonoBehaviour
     public void setHUDActive(bool arg)
     {
         hud.SetActive(arg);
+    }
+    public void Pause()
+    {
+        pauseMenu.SetActive(true);
+    }
+    public void Unpause()
+    {
+        pauseMenu.SetActive(false);
     }
 }
