@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public GameObject startMenu;
     public GameObject pauseMenu;
+    public GameObject gameOverMenu;
     public GameObject hud;
     public GameObject timer;
     public GameObject fuelText;
@@ -62,5 +63,9 @@ public class UIManager : MonoBehaviour
     public void Unpause()
     {
         pauseMenu.SetActive(false);
+    }
+    public void SetGameOverActive(bool arg)
+    {
+        gameOverMenu.SetActive(arg);
     }
 }

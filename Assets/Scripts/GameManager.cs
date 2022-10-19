@@ -95,7 +95,6 @@ public class GameManager : MonoBehaviour
                         }
                     }
                 }
-
                 // Handle lose condition
                 if (timeLeft > 0 && timeLeft - Time.deltaTime <= 0)
                     endRound(false);
@@ -103,7 +102,6 @@ public class GameManager : MonoBehaviour
                 timeLeft -= Time.deltaTime;
                 uiManager.setTimerTime(timeLeft);
                 uiManager.setFuel(fuel);
-
             }
         }
     }
@@ -141,7 +139,6 @@ public class GameManager : MonoBehaviour
         curPlanet = 0;
         spawnPlanet();
 
-        Debug.Log("Rocket bool: "+((bool)rocket).ToString());
         if (rocket)
         {
             Destroy(rocket);
@@ -223,6 +220,11 @@ public class GameManager : MonoBehaviour
         switchCam(sing.freeCam);
 
         yield return new WaitForSeconds(3);
+
+        uiManager.SetGameOverActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        /*
         player.gameObject.SetActive(false);
 
         sing.uiManager.setStartMenuActive(true);
@@ -230,7 +232,7 @@ public class GameManager : MonoBehaviour
 
         // Enable cursor for UI interaction
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.None;*/
     }
 
     public void spawnPlanet()
