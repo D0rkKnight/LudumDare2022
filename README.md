@@ -7,6 +7,9 @@ This was developed with relatively few hours put in.
 ## TODO
 
  **Stuff that would be nice for release:**
+ - Fix WebGL shader bug
+ - Fix bug where you can pause during game over screen
+ - Have music start quieter 
  - Add "Press F to enter rocket" prompt
  - Rocket particle effects
  - Make the particles on the planet look more noticeable.
