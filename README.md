@@ -20,13 +20,16 @@ Title screen
 ![Title screen](readme-screenshot-1.png)
 
 Gameplay 1
-![Gameplay 1](readme-screenshot-2.png)
+
+![Gameplay 1](readme-screenshot-21.png)
 
 Gameplay 2
-![gameplay 2](readme-screenshot-3.png)
+
+![gameplay 2](readme-screenshot-31.png)
 
 Game over
-![gameplay 2](readme-screenshot-4.png)
+
+![game over](readme-screenshot-4.png)
 
 
 :~)
