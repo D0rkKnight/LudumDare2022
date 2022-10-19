@@ -83,6 +83,9 @@ public class Planet : MonoBehaviour
                     }
                 }
             }
+            if (rumbleElapsed / rumbleTime > 1.0f) {
+                explode();
+            }
         }
     }
 
@@ -167,6 +170,8 @@ public class Planet : MonoBehaviour
         }
     }
 
+    /*
+     * */
     public void explode()
     {
         foreach (GameObject t in tiles)
@@ -178,7 +183,6 @@ public class Planet : MonoBehaviour
             rb.AddForceAtPosition(dir * 100f, randomPosition);
             rb.useGravity = false;
         }
-        Destroy(gameObject, 3);
 
         // Pause spin
         Spinner sp = GetComponent<Spinner>();

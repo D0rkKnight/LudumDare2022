@@ -5,12 +5,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject Ball;
-    bool rocketBoarded = false;
     public Planet []planetPrefabs;
     public Rocket rocketPrefab;
     public Camera freeCam;
 
     private int curPlanet = 0; //counts from 0 to planetPrefabs.Length;
+
+    bool rocketBoarded = false;
+    public bool inPlay = false;
 
     public static List<GameObject> objInRange;
     public static Player player;
@@ -21,12 +23,6 @@ public class GameManager : MonoBehaviour
     public static Planet ico;
 
     public static float timeLeft = 10f;
-
-    public static bool gameIsOver = false;
-    public static bool startReady = true;
-    public static bool restartReady = false;
-    public static bool inPlay = false;
-    public static bool charActive = false;
 
     public static Camera activeCam;
 
@@ -46,7 +42,6 @@ public class GameManager : MonoBehaviour
         sing = this;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         objInRange = new List<GameObject>();
@@ -64,132 +59,71 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Raycast objects
-        RaycastHit hit;
-        LayerMask mask = LayerMask.GetMask(new string[] { "Selectable" });
-
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 100f, mask))
+        if (inPlay)
         {
-            GameObject obj = hit.transform.gameObject;
+            // Raycast objects
+            RaycastHit hit;
+            LayerMask mask = LayerMask.GetMask(new string[] { "Selectable" });
 
-            if (objInRange.Contains(obj))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 100f, mask))
             {
-                // Rocket boarding
-                if (Input.GetKeyDown(KeyCode.F) && fuel >= targetFuel)
+                GameObject obj = hit.transform.gameObject;
+
+                if (objInRange.Contains(obj))
                 {
-                    endRound(true);
+                    // Rocket boarding / win condition
+                    if (Input.GetKeyDown(KeyCode.F) && fuel >= targetFuel)
+                    {
+                        endRound(true);
+                    }
                 }
             }
-        }
 
-        // Update timer
-        if (timeLeft > 0 && timeLeft - Time.deltaTime <= 0)
-            endRound(false);
+            // Handle lose condition
+            if (timeLeft > 0 && timeLeft - Time.deltaTime <= 0)
+                endRound(false);
 
-        timeLeft -= Time.deltaTime;
-        uiManager.setTimerTime(timeLeft);
-        uiManager.setFuel(fuel);
-    }
-    IEnumerator LiftOff()
-    {
-        float wait = Mathf.Min(2.0f, timeLeft-1.0f);
-        if(wait > 0)
-            yield return new WaitForSeconds(wait);
-        
-        rocketBoarded = true;
-        fuel = 0; // Reset fuel
-
-        // Deparent rocket
-        rocket.transform.parent = null;
-        StartCoroutine(rocket.boostOff());
-    }
-
-    public IEnumerator explode()
-    {
-        ico.explode();
-        rocket.transform.parent = null;
-
-        if (!rocketBoarded)
-        {
-            StartCoroutine(gameOver());
-        }
-        else
-        {
-            // Load in a new planet
-            yield return new WaitForSeconds(3);
-
-            spawnPlanet();
-            StartCoroutine(landRocket());
+            timeLeft -= Time.deltaTime;
+            uiManager.setTimerTime(timeLeft);
+            uiManager.setFuel(fuel);
         }
     }
 
-    public static IEnumerator gameOver()
-    {
-        gameIsOver = true;
-        inPlay = false;
-
-        switchCam(sing.freeCam);
-
-        yield return new WaitForSeconds(3);
-        player.gameObject.SetActive(false);
-
-        startReady = true; // Toggle restart flip flop
-        sing.uiManager.setStartMenuActive(true);
-        sing.uiManager.setHUDActive(false);
 
 
-        // Enable cursor for UI interaction
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
 
-    //End the round. Success == true means we switch to the rocket and liftoff, false means game over. 
-    public void endRound(bool success)
-    {
-        if (success) { 
-            switchCam(rocket.cam);
-
-            ico.GetComponent<Spinner>().enabled = false;
-            // Get into it!
-            player.gameObject.SetActive(false);
-            charActive = false;
-            StartCoroutine(LiftOff());
-        }
-        else
-        {
-            StartCoroutine(explode());
-            charActive = false;
-        }
-    }
 
     public void startGame()
     {
-        charActive = false;
-        gameIsOver = false;
-        startReady = false;
-        sing.uiManager.setStartMenuActive(false);
-        sing.uiManager.setHUDActive(false);
-        restartReady = false;
-        inPlay = true;
+        inPlay = false;
+        uiManager.setStartMenuActive(false);
+        uiManager.setHUDActive(false);
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
         curPlanet = 0;
-        sing.spawnPlanet();
+        spawnPlanet();
 
-        if (rocket == null)
+        Debug.Log("Rocket bool: "+((bool)rocket).ToString());
+        if (rocket)
         {
-            // Spawn rocket
-            Rocket rok = Instantiate(sing.rocketPrefab);
-        }
+            Destroy(rocket);
+        }            
+        // Spawn rocket
+        rocket = Instantiate(rocketPrefab);
+        
 
-        sing.StartCoroutine(sing.landRocket());
+
+
+        StartCoroutine(LandRocket());
     }
 
     //enable player interaction, start countdown, attach the rocket to a tile, etc.
     public void startRound()
     {
+        inPlay = true;
+
         ico.attachRocket(rocket);
 
         // Dump player back out and enable the spinner
@@ -197,7 +131,6 @@ public class GameManager : MonoBehaviour
         Spinner sp = ico.GetComponent<Spinner>();
         sp.attachPlayer(player);
         sp.enabled = true;
-        charActive = true;
 
         //Init HUD
         timeLeft = OptionsMenu.duration;
@@ -213,19 +146,47 @@ public class GameManager : MonoBehaviour
 
         // Swap cam views back to player
         switchCam(player.cam);
+    }    
+    //End the round. Success == true means we switch to the rocket and LaunchRocket, false means game over. 
+    public void endRound(bool success)
+    {
+        inPlay = false;
+        if (success)
+        {
+            switchCam(rocket.cam);
+            ico.GetComponent<Spinner>().enabled = false;
+            // Get into the rocket!
+            player.gameObject.SetActive(false);
+            StartCoroutine(LaunchRocket());
+        }
+        else
+        {
+            StartCoroutine(EndGame());
+        }
     }
 
 
 
-    public void endGame()
+    public IEnumerator EndGame()
     {
 
+        switchCam(sing.freeCam);
+
+        yield return new WaitForSeconds(3);
+        player.gameObject.SetActive(false);
+
+        sing.uiManager.setStartMenuActive(true);
+        sing.uiManager.setHUDActive(false);
+
+        // Enable cursor for UI interaction
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void spawnPlanet()
     {
-        if (ico != null)
-            Destroy(ico);
+        if (ico)
+            Destroy(ico.gameObject);
 
         ico = Instantiate(planetPrefabs[curPlanet]);
         ico.GetComponent<Spinner>().enabled = false;
@@ -233,9 +194,39 @@ public class GameManager : MonoBehaviour
         curPlanet=(curPlanet+1)%planetPrefabs.Length;
     }
 
-    // Assumes rocket is attached to a tile
-    public IEnumerator landRocket()
+
+
+    public IEnumerator LaunchRocket()
     {
+        //Rocket takes at most 1.5 seconds to lift off
+        // Deparent rocket
+        rocket.transform.parent = null;
+        float wait = Mathf.Clamp(timeLeft, 0.0f, 1.5f);
+        yield return new WaitForSeconds(wait);
+
+        fuel = 0; // Reset fuel
+
+        rocket.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
+        float timestamp = Time.time + 2;
+        while (Time.time < timestamp)
+        {
+            rocket.GetComponent<Rigidbody>().AddForce(transform.up * Time.deltaTime * 40f);
+            yield return new WaitForFixedUpdate();
+        }
+
+        //get next planet and start next sequence
+        spawnPlanet();
+        StartCoroutine(LandRocket());
+    }
+
+    // Assumes rocket is attached to a tile
+    public IEnumerator LandRocket()
+    {
+        float rocketStartHeight = 10.0f;
+        float rocketSpeed = 2.0f;
+        float rocketTargetHeight = ico.size-0.08f;
+
         switchCam(rocket.cam);
 
         // Deactivate player for landing animation
@@ -248,13 +239,13 @@ public class GameManager : MonoBehaviour
 
         // Rotate planet so that up is aligned with the rocket.
         rocket.transform.localRotation = Quaternion.identity;
-        rocket.transform.localPosition = Vector3.up * 10;
+        rocket.transform.localPosition = Vector3.up * rocketStartHeight;
         //ico.transform.rotation = Quaternion.Inverse(rocket.transform.rotation);
 
         float timestamp = Time.time + 3;
         while (Time.time < timestamp)
         {
-            rocket.transform.localPosition = Vector3.Lerp(rocket.transform.localPosition, Vector3.up * (ico.size), Time.deltaTime * 2f);
+            rocket.transform.localPosition = Vector3.Lerp(rocket.transform.localPosition, Vector3.up * rocketTargetHeight, 1.0f-Mathf.Exp(-Time.deltaTime * rocketSpeed));
             yield return new WaitForEndOfFrame();
         }
 

@@ -9,6 +9,6 @@ public class TimerText : CustomText
         float display = Mathf.Max(0, GameManager.timeLeft);
         txt.text = display.ToString("F3");
 
-        txt.enabled = GameManager.inPlay;
+        //txt.enabled = GameManager.inPlay;
     }
 }

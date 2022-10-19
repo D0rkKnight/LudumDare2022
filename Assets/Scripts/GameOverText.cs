@@ -6,6 +6,6 @@ public class GameOverText : CustomText
 {
     public override void setText()
     {
-        txt.enabled = GameManager.gameIsOver;
+        //txt.enabled = GameManager.gameIsOver;
     }
 }
