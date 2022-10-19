@@ -709,6 +709,10 @@ PrefabInstance:
       propertyPath: collide
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2025659440, guid: 2a0c307d319fc574793d9d82de904369, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.52
+      objectReference: {fileID: 0}
     - target: {fileID: 8328305817423162436, guid: 2a0c307d319fc574793d9d82de904369,
         type: 3}
       propertyPath: m_Name
@@ -1037,6 +1041,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5313131869730193092}
     m_Modifications:
+    - target: {fileID: 502021440562315917, guid: 16439ff4436914e43aff9426fd90f145,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -221.49023
+      objectReference: {fileID: 0}
+    - target: {fileID: 502021440562315917, guid: 16439ff4436914e43aff9426fd90f145,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 57.399902
+      objectReference: {fileID: 0}
     - target: {fileID: 691612369131081377, guid: 16439ff4436914e43aff9426fd90f145,
         type: 3}
       propertyPath: m_Pivot.x

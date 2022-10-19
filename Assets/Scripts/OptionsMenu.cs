@@ -5,24 +5,20 @@ using TMPro;
 
 public class OptionsMenu : MonoBehaviour
 {
-
     public static float volume = 1.0f;
     public static float duration = 10.0f;
 
     [SerializeField]
     private GameObject textToUpdate;
+
     [SerializeField]
     private GameObject volumeSlider;
+
     [SerializeField]
     private GameObject timeSlider;
 
     [SerializeField]
     private GameObject MainMusic;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void setVolume(float arg)
     {
@@ -37,11 +33,5 @@ public class OptionsMenu : MonoBehaviour
         {
             textToUpdate.GetComponent<TextMeshProUGUI>().SetText(arg.ToString("0s"));
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

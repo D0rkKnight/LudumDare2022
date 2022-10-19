@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     }
     public void MenuPlayGame()
     {
-        GameManager.startGame();
+        GameManager.sing.startGame();
     }
     public void MenuDebugScene()
     {

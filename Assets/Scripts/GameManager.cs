@@ -7,9 +7,10 @@ public class GameManager : MonoBehaviour
     public GameObject Ball;
     bool rocketBoarded = false;
     public Planet []planetPrefabs;
-    private int curPlanet = 0; //counts from 0 to planetPrefabs.Length;
     public Rocket rocketPrefab;
     public Camera freeCam;
+
+    private int curPlanet = 0; //counts from 0 to planetPrefabs.Length;
 
     public static List<GameObject> objInRange;
     public static Player player;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     public static bool startReady = true;
     public static bool restartReady = false;
     public static bool inPlay = false;
+    public static bool charActive = false;
 
     public static Camera activeCam;
 
@@ -33,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     public UIManager uiManager;
 
+    private float targetFuel = 10.0f;
+
 
     private void Awake()
     {
@@ -40,7 +44,6 @@ public class GameManager : MonoBehaviour
             throw new System.Exception("Singleton broken");
 
         sing = this;
-        curPlanet = 0;
     }
 
     // Start is called before the first frame update
@@ -48,11 +51,14 @@ public class GameManager : MonoBehaviour
     {
         objInRange = new List<GameObject>();
         activeCam = Camera.main;
+
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         if (!player)
         {
             Debug.Log("Couldn't find player object in GameManager!");
         }
+
+        curPlanet = 0;
     }
 
     // Update is called once per frame
@@ -69,36 +75,29 @@ public class GameManager : MonoBehaviour
             if (objInRange.Contains(obj))
             {
                 // Rocket boarding
-                if (Input.GetKeyDown(KeyCode.F) && fuel >= 10)
+                if (Input.GetKeyDown(KeyCode.F) && fuel >= targetFuel)
                 {
-                    switchCam(rocket.cam);
-
-                    ico.GetComponent<Spinner>().enabled = false;
-                    // Get into it!
-                    player.gameObject.SetActive(false);
-                    StartCoroutine(LiftOff());
+                    endRound(true);
                 }
             }
         }
 
         // Update timer
         if (timeLeft > 0 && timeLeft - Time.deltaTime <= 0)
-            StartCoroutine(explode());
+            endRound(false);
 
         timeLeft -= Time.deltaTime;
         uiManager.setTimerTime(timeLeft);
-        uiManager.setFuelText(fuel);
+        uiManager.setFuel(fuel);
     }
     IEnumerator LiftOff()
     {
-        int wait = Mathf.Min(2, (int)timeLeft-1);
-        for (int i = 0; i < wait; i++)
-        {
-            yield return new WaitForSeconds(1);
-            Debug.Log(wait - i);
-        }
+        float wait = Mathf.Min(2.0f, timeLeft-1.0f);
+        if(wait > 0)
+            yield return new WaitForSeconds(wait);
+        
         rocketBoarded = true;
-        fuel = 0; // Out of fuel
+        fuel = 0; // Reset fuel
 
         // Deparent rocket
         rocket.transform.parent = null;
@@ -108,6 +107,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator explode()
     {
         ico.explode();
+        rocket.transform.parent = null;
 
         if (!rocketBoarded)
         {
@@ -143,8 +143,28 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    public static void startGame()
+    //End the round. Success == true means we switch to the rocket and liftoff, false means game over. 
+    public void endRound(bool success)
     {
+        if (success) { 
+            switchCam(rocket.cam);
+
+            ico.GetComponent<Spinner>().enabled = false;
+            // Get into it!
+            player.gameObject.SetActive(false);
+            charActive = false;
+            StartCoroutine(LiftOff());
+        }
+        else
+        {
+            StartCoroutine(explode());
+            charActive = false;
+        }
+    }
+
+    public void startGame()
+    {
+        charActive = false;
         gameIsOver = false;
         startReady = false;
         sing.uiManager.setStartMenuActive(false);
@@ -154,6 +174,8 @@ public class GameManager : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        curPlanet = 0;
         sing.spawnPlanet();
 
         if (rocket == null)
@@ -165,12 +187,48 @@ public class GameManager : MonoBehaviour
         sing.StartCoroutine(sing.landRocket());
     }
 
+    //enable player interaction, start countdown, attach the rocket to a tile, etc.
+    public void startRound()
+    {
+        ico.attachRocket(rocket);
+
+        // Dump player back out and enable the spinner
+        player.gameObject.SetActive(true);
+        Spinner sp = ico.GetComponent<Spinner>();
+        sp.attachPlayer(player);
+        sp.enabled = true;
+        charActive = true;
+
+        //Init HUD
+        timeLeft = OptionsMenu.duration;
+        uiManager.setTimerTime(timeLeft);
+        uiManager.setTransparency(1.0f);
+        uiManager.setFuel(0.0f);
+        uiManager.setNeededFuel(10.0f);
+        uiManager.setHUDActive(true);
+
+        //Start the planet rumble sequence
+        //Rumbling and stuff is handled by ico's Update function.
+        ico.triggerRumble(timeLeft);
+
+        // Swap cam views back to player
+        switchCam(player.cam);
+    }
+
+
+
+    public void endGame()
+    {
+
+    }
+
     public void spawnPlanet()
     {
         if (ico != null)
             Destroy(ico);
 
         ico = Instantiate(planetPrefabs[curPlanet]);
+        ico.GetComponent<Spinner>().enabled = false;
         ico.size = 2.3f;
         curPlanet=(curPlanet+1)%planetPrefabs.Length;
     }
@@ -199,19 +257,8 @@ public class GameManager : MonoBehaviour
             rocket.transform.localPosition = Vector3.Lerp(rocket.transform.localPosition, Vector3.up * (ico.size), Time.deltaTime * 2f);
             yield return new WaitForEndOfFrame();
         }
-        
-        ico.attachRocket(rocket);
 
-        // Dump player back out
-        player.gameObject.SetActive(true);
-        timeLeft = 10f;
-        ico.triggerRumble(timeLeft);
-        Spinner sp = ico.GetComponent<Spinner>();
-        ico.GetComponent<Spinner>().attachPlayer(player);
-
-        // Swap cam views back to player
-        switchCam(player.cam);
-        sing.uiManager.setHUDActive(true);
+        startRound();
     }
 
     public static void switchCam(Camera cam)

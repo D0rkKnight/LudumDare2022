@@ -150,6 +150,7 @@ public class Planet : MonoBehaviour
             {
                 rocketRef.transform.SetParent(tiles[1].transform, false);
                 rocketRef.transform.localPosition = new Vector3(0.0f, 0.25f, 0.0f);
+                //rocketRef.transform.SetParent(null,true);
             }
             this.rocketRef = rocketRef;
         }
