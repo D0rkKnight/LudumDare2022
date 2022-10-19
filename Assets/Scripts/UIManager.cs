@@ -12,17 +12,20 @@ public class UIManager : MonoBehaviour
     public GameObject hud;
     public GameObject timer;
     public GameObject fuelText;
+    public GameObject hudPlanetText;
+    public GameObject gameOverPlanetText;
 
     //private float maxTime=10.0f;
     private float neededFuel = 10.0f;
     private float fuel = 0.0f;
+    private int thisPlanet = 1;
 
 
     /* transparency TODO */
-    public void setTransparency(float arg)
+    /*public void setTransparency(float arg)
     {
 
-    }
+    }*/
     public void setTimerTime(float arg)
     {
         if (arg < 0)
@@ -41,6 +44,20 @@ public class UIManager : MonoBehaviour
         neededFuel = arg;
         updateText();
     }
+
+    public void setPlanetText(int planet)
+    {
+        if(hudPlanetText)
+            hudPlanetText.GetComponent<TextMeshProUGUI>().SetText("Planet " + planet.ToString() + "/5");
+        thisPlanet = planet;
+    }
+    public void setGameOverPlanetText(int planet)
+    {
+       if(gameOverPlanetText)
+            gameOverPlanetText.GetComponent<TextMeshProUGUI>().SetText("You made it to "+planet.ToString()+"/5 planets.");
+        thisPlanet = planet;
+    }
+
     private void updateText()
     {
         fuelText.GetComponent<TextMeshProUGUI>().SetText("Fuel: " + fuel.ToString() + "/" + neededFuel.ToString());
@@ -67,5 +84,6 @@ public class UIManager : MonoBehaviour
     public void SetGameOverActive(bool arg)
     {
         gameOverMenu.SetActive(arg);
+        setGameOverPlanetText(thisPlanet);
     }
 }

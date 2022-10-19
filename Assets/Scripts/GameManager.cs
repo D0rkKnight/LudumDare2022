@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -11,7 +12,6 @@ public class GameManager : MonoBehaviour
 
     private int curPlanet = 0; //counts from 0 to planetPrefabs.Length;
 
-    bool rocketBoarded = false;
     public bool inPlay = false;
     private bool paused = false;
 
@@ -35,12 +35,43 @@ public class GameManager : MonoBehaviour
     private float targetFuel = 10.0f;
 
 
+    private int nBackgroundPlanets = 0;
+    private Planet[] backgroundPlanets; 
+
+
     private void Awake()
     {
         if (sing != null)
             throw new System.Exception("Singleton broken");
 
         sing = this;
+    }
+    void instantiateBackgroundPlanets()
+    {
+        backgroundPlanets = new Planet[nBackgroundPlanets];
+        for (int i = 0; i < nBackgroundPlanets; i++) {
+            backgroundPlanets[i]=Instantiate(planetPrefabs[(int)Random.Range(0.0f, planetPrefabs.Length)]);
+            backgroundPlanets[i].gameObject.transform.position=Random.onUnitSphere*Random.Range(50f,200f);
+            backgroundPlanets[i].gameObject.transform.rotation=Random.rotationUniform;
+           
+        }
+    }
+    private void attachBackgroundPlanets()
+    {
+        if (ico)
+        {
+            foreach (Planet p in backgroundPlanets)
+            {
+                p.gameObject.transform.parent = ico.transform;
+            }
+        }
+    }
+    private void detachBackgroundPlanets()
+    {
+        foreach (Planet p in backgroundPlanets)
+        {
+            p.gameObject.transform.parent = null;
+        }
     }
 
     void Start()
@@ -56,6 +87,7 @@ public class GameManager : MonoBehaviour
         }
 
         curPlanet = 0;
+        instantiateBackgroundPlanets();
     }
 
     // Update is called once per frame
@@ -131,7 +163,7 @@ public class GameManager : MonoBehaviour
     {
         inPlay = false;
         uiManager.setStartMenuActive(false);
-        uiManager.setHUDActive(false);
+        uiManager.setHUDActive(true);
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -169,7 +201,7 @@ public class GameManager : MonoBehaviour
         fuel = 0;
         timeLeft = OptionsMenu.duration;
         uiManager.setTimerTime(timeLeft);
-        uiManager.setTransparency(1.0f);
+        //uiManager.setTransparency(1.0f);
         uiManager.setFuel(0.0f);
         uiManager.setNeededFuel(10.0f);
         uiManager.setHUDActive(true);
@@ -237,13 +269,16 @@ public class GameManager : MonoBehaviour
 
     public void spawnPlanet()
     {
+        detachBackgroundPlanets();
         if (ico)
             Destroy(ico.gameObject);
 
-        ico = Instantiate(planetPrefabs[curPlanet]);
+        ico = Instantiate(planetPrefabs[curPlanet % planetPrefabs.Length]);
         ico.GetComponent<Spinner>().enabled = false;
         ico.size = 2.3f;
-        curPlanet=(curPlanet+1)%planetPrefabs.Length;
+        curPlanet++;
+        uiManager.setPlanetText(curPlanet);
+        attachBackgroundPlanets();
     }
 
 
