@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public GameObject fuelText;
     public GameObject hudPlanetText;
     public GameObject gameOverPlanetText;
+    public StartMenuRandomBackground smRandomImage;
 
     //private float maxTime=10.0f;
     private float neededFuel = 10.0f;
@@ -67,6 +68,7 @@ public class UIManager : MonoBehaviour
     public void setStartMenuActive(bool arg)
     {
         startMenu.SetActive(arg);
+        smRandomImage.randomize();
     }
 
     public void setHUDActive(bool arg)
