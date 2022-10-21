@@ -48,6 +48,10 @@ public class GameManager : MonoBehaviour
 
     private bool hardModeActive = false;
 
+    private int nParticlesToSpawn = 15;
+    private float sizeRandomness = 0.2f;
+    private float planetSize = 1.7f;
+
 
     private void Awake()
     {
@@ -100,6 +104,32 @@ public class GameManager : MonoBehaviour
         instantiateBackgroundPlanets();
     }
 
+    //adjust planetSize, nParticlesToSpawn, and sizeRandomness
+    //according to difficulty.
+    private void setPlanetDifficulty()
+    {
+        if (hardModeActive) {
+            nParticlesToSpawn = 10;
+            if (curPlanet > 5) //ridiculous planets
+            {
+                planetSize = 3.5f;
+                sizeRandomness = 2.0f;
+            } 
+            else
+            {
+                //Planets get progressively larger, more extreme in hard mode
+                planetSize = 2.3f + curPlanet * 0.1f ;
+                sizeRandomness = 0.2f+curPlanet *0.2f;
+            }
+
+        } else
+        {
+            nParticlesToSpawn = 15;
+            //Planets get progressively larger
+            planetSize = 1.7f + curPlanet * 0.05f;
+            sizeRandomness = 0.1f + curPlanet * 0.05f;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -184,6 +214,10 @@ public class GameManager : MonoBehaviour
 
 
 
+    public void Retry()
+    {
+        startGame(hardModeActive);
+    }
 
     public void startGameHardmode()
     {
@@ -192,6 +226,7 @@ public class GameManager : MonoBehaviour
 
     public void startGame(bool hardmode=false)
     {
+        Time.timeScale = 1.0f;
         hardModeActive=hardmode;
         inPlay = false;
         uiManager.setStartMenuActive(false);
@@ -310,9 +345,16 @@ public class GameManager : MonoBehaviour
         if (ico)
             Destroy(ico.gameObject);
 
+
+        setPlanetDifficulty();
         ico = Instantiate(planetPrefabs[curPlanet % planetPrefabs.Length]);
         ico.GetComponent<Spinner>().enabled = false;
-        ico.size = 2.3f;
+        ico.size = Random.Range(planetSize-sizeRandomness,planetSize+sizeRandomness);
+
+        ParticleSpawner spawner = ico.GetComponent<ParticleSpawner>();
+        spawner.nToSpawn = nParticlesToSpawn;
+        spawner.respawnParticles();
+
         curPlanet++;
         uiManager.setPlanetText(curPlanet);
         attachBackgroundPlanets();

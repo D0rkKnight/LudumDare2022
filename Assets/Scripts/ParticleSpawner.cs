@@ -6,6 +6,7 @@ public class ParticleSpawner : MonoBehaviour
 {
     public GameObject ballPrefab;
     public int nToSpawn=20;
+    private GameObject []spawned;
     //Mesh spheremesh = GameObject.Find("Sphere").GetComponent<MeshFilter>().mesh;
     //Vector3[] verts = spheremesh.vertices;
     // Start is called before the first frame update
@@ -31,11 +32,25 @@ public class ParticleSpawner : MonoBehaviour
             //var spawn = Instantiate(ball, matrix.MultiplyPoint3x4(verts[i]),transform.rotation);
             
         }*/
-
-        for (int i = 0; i < nToSpawn;i++)
+    }
+    private void destroyParticles()
+    {
+        if (spawned!=null)
+        {
+            foreach (GameObject p in spawned)
+            {
+                if (p)
+                    Destroy(p);
+            }
+        }
+    }
+    private void spawnParticles()
+    {
+        spawned = new GameObject[nToSpawn];
+        for (int i = 0; i < nToSpawn; i++)
         {
             //var Go = GameObject.Find("Particles");
-            var spawn = Instantiate(ballPrefab, transform);
+            spawned[i] = Instantiate(ballPrefab, transform);
 
             float rad = 1.0f;
             Planet p = GetComponent<Planet>();
@@ -43,8 +58,13 @@ public class ParticleSpawner : MonoBehaviour
             {
                 rad = p.size + 0.4f;
             }
-            spawn.transform.Translate(Random.onUnitSphere * rad);
+            spawned[i].transform.Translate(Random.onUnitSphere * rad);
         }
+    }
+    public void respawnParticles()
+    {
+        destroyParticles();
+        spawnParticles();
     }
 
     // Update is called once per frame

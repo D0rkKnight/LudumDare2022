@@ -113,7 +113,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   glowMat: {fileID: 2100000, guid: 73bddb3c5f1427e469f28701c098c607, type: 2}
   rend: {fileID: 5622838132938586979}
-  lerpTarget: {fileID: 0}
   collectSpeed: 1
 --- !u!54 &564927286547099120
 Rigidbody:
