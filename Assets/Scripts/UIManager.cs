@@ -15,6 +15,10 @@ public class UIManager : MonoBehaviour
     public GameObject hudPlanetText;
     public GameObject gameOverPlanetText;
     public StartMenuRandomBackground smRandomImage;
+    public GameObject fueledUpText;
+    public GameObject pressFText;
+    public GameObject victoryMenu;
+    public GameObject hardModeMenu;
 
     //private float maxTime=10.0f;
     private float neededFuel = 10.0f;
@@ -75,6 +79,15 @@ public class UIManager : MonoBehaviour
     {
         hud.SetActive(arg);
     }
+
+    public void SetFueledActive(bool arg)
+    {
+        fueledUpText.SetActive(arg);
+    }
+    public void SetRocketFActive(bool arg)
+    {
+        pressFText.SetActive(arg);
+    }
     public void Pause()
     {
         pauseMenu.SetActive(true);
@@ -88,4 +101,12 @@ public class UIManager : MonoBehaviour
         gameOverMenu.SetActive(arg);
         setGameOverPlanetText(thisPlanet);
     }
-}
+    public void SetVictoryActive(bool arg)
+    {
+        victoryMenu.SetActive(arg);
+    }
+    public void SetHardmodeVictoryActive(bool arg)
+    {
+        hardModeMenu.SetActive(arg);
+    }
+    }

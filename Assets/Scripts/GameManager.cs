@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public bool inPlay = false;
     private bool paused = false;
+    private bool pausable = true; //used to disable pause on the game over screen
 
     public static List<GameObject> objInRange;
     public static Player player;
@@ -36,7 +37,16 @@ public class GameManager : MonoBehaviour
 
 
     private int nBackgroundPlanets = 0;
-    private Planet[] backgroundPlanets; 
+    private Planet[] backgroundPlanets;
+
+    /* modeUnlocked 0 - game not won yet
+     * modeUnlocked 1 - Game won, hardmode unlocked
+     * modeUnlocked 2 - Hard mode won
+     * enums? Who needs um
+    */
+    public static int modeUnlocked = 0;
+
+    private bool hardModeActive = false;
 
 
     private void Awake()
@@ -93,6 +103,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        uiManager.SetRocketFActive(false);
+        if (fuel >= targetFuel)
+        {
+            uiManager.SetFueledActive(true);
+        } else
+        {
+            uiManager.SetFueledActive(false);
+        }
+
         if (paused)
         {
             if(Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
@@ -103,10 +122,12 @@ public class GameManager : MonoBehaviour
         else
         {
 
-            if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
+            if (pausable && (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)))
             {
                 Pause();
+                Debug.Log("game state: " + GameManager.modeUnlocked);
             }
+            
 
             if (inPlay)
             {
@@ -120,6 +141,10 @@ public class GameManager : MonoBehaviour
 
                     if (objInRange.Contains(obj))
                     {
+                        if (fuel >= targetFuel)
+                        {
+                            uiManager.SetRocketFActive(true);
+                        }
                         // Rocket boarding / win condition
                         if (Input.GetKeyDown(KeyCode.F) && fuel >= targetFuel)
                         {
@@ -159,14 +184,25 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void startGame()
+
+    public void startGameHardmode()
     {
+        startGame(true);
+    }
+
+    public void startGame(bool hardmode=false)
+    {
+        hardModeActive=hardmode;
         inPlay = false;
         uiManager.setStartMenuActive(false);
         uiManager.setHUDActive(true);
+        pausable = true; //reset pausable if we came from game over menu
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        fuel = 0;
+        timeLeft = OptionsMenu.duration;
 
         curPlanet = 0;
         spawnPlanet();
@@ -203,7 +239,7 @@ public class GameManager : MonoBehaviour
         uiManager.setTimerTime(timeLeft);
         //uiManager.setTransparency(1.0f);
         uiManager.setFuel(0.0f);
-        uiManager.setNeededFuel(10.0f);
+        uiManager.setNeededFuel(targetFuel);
         uiManager.setHUDActive(true);
 
         //Start the planet rumble sequence
@@ -254,6 +290,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         uiManager.SetGameOverActive(true);
+        pausable = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         /*
@@ -305,11 +342,46 @@ public class GameManager : MonoBehaviour
 
         //get next planet and start next sequence
         spawnPlanet();
+
+        if (curPlanet == 6)
+        {
+            pausable = false;
+            Time.timeScale = 0.0f;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            if (hardModeActive)
+            {
+                //hard mode won
+                if (modeUnlocked == 1)
+                    modeUnlocked = 2;
+                uiManager.SetHardmodeVictoryActive(true);
+
+            } else
+            {
+                uiManager.SetVictoryActive(true);
+                //unlock hard mode if not already unlocked
+                if (modeUnlocked == 0)
+                    modeUnlocked = 1;
+            }
+        } else
+        {
+            StartCoroutine(LandRocket());
+        }
+    }
+    public void ReturnFromGameWon()
+    {
         StartCoroutine(LandRocket());
+        pausable = true;
+        Time.timeScale = 1.0f;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
-    // Assumes rocket is attached to a tile
-    public IEnumerator LandRocket()
+
+        // Assumes rocket is attached to a tile
+        public IEnumerator LandRocket()
     {
         float rocketStartHeight = 10.0f;
         float rocketSpeed = 2.0f;
@@ -319,6 +391,13 @@ public class GameManager : MonoBehaviour
 
         // Deactivate player for landing animation
         player.gameObject.SetActive(false);
+
+        fuel = 0;
+        timeLeft = OptionsMenu.duration;
+        uiManager.setTimerTime(timeLeft);
+        //uiManager.setTransparency(1.0f);
+        uiManager.setFuel(0.0f);
+        uiManager.setNeededFuel(targetFuel);
 
         rocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
        
