@@ -5,7 +5,7 @@ using TMPro;
 
 public class OptionsMenu : MonoBehaviour
 {
-    public static float volume = 1.0f;
+    public static float volume = 0.5f;
     public static float duration = 10.0f;
 
     [SerializeField]
@@ -17,8 +17,6 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField]
     private GameObject timeSlider;
 
-    [SerializeField]
-    private GameObject MainMusic;
 
     public void setVolume(float arg)
     {

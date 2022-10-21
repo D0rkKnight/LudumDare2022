@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,13 +53,18 @@ public class GameManager : MonoBehaviour
     private float sizeRandomness = 0.2f;
     private float planetSize = 1.7f;
 
+    [SerializeField]
+    private GameObject MainMusic;
 
     private void Awake()
     {
         if (sing != null)
             throw new System.Exception("Singleton broken");
-
         sing = this;
+
+        AudioListener.volume = OptionsMenu.volume;
+
+
     }
     void instantiateBackgroundPlanets()
     {
